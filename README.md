@@ -7,3 +7,7 @@ This repo contains genesis files for the Evmos Testnets.
 The latest testnet is Arsia Mons.
 
 [Join the testnet](https://evmos.dev/testnet/join.html).
+
+## Seeds
+
+- c36cec90ded95d162b85f8ecd00ecd7c8849ca75@arsiamons.seed.evmos.org:26656
