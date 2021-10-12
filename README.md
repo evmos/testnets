@@ -11,4 +11,4 @@ The latest testnet is Arsia Mons.
 ## Seeds
 
 - c36cec90ded95d162b85f8ecd00ecd7c8849ca75@arsiamons.seed.evmos.org:26656
-- 61a9e8831fb687d58601cd677df220fa392e38b9@evmos-seed.artifact-staking.io:26656
+- 3787335176bbb91bf14a67724ebe0f0940ca5afb@evmos-seed.artifact-staking.io:26656
