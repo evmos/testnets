@@ -11,7 +11,7 @@ Follow the instructions on the official documentation to [join the testnet](http
 - `evmosd` version: [`v0.1.x`](https://github.com/tharsis/evmos/releases)
 - Faucet: [faucet.evmos.org](https://faucet.evmos.org)
 - EVM explorer: [evm.evmos.org](https://evm.evmos.org)
-- Cosmos explorer: [explorer.evmos.org](https://evm.evmos.org)
+- Cosmos explorer: [explorer.evmos.org](https://explorer.evmos.org)
 
 ## Seeds & Peers
 
