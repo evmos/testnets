@@ -11,3 +11,4 @@ The latest testnet is Arsia Mons.
 ## Seeds
 
 - c36cec90ded95d162b85f8ecd00ecd7c8849ca75@arsiamons.seed.evmos.org:26656
+- 1aee160f5eba94710d90cc08c3e3c7525f4faff3@evmos-testnet.mercury-nodes.net:29447
