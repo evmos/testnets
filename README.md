@@ -11,3 +11,8 @@ The latest testnet is Arsia Mons.
 ## Seeds
 
 - c36cec90ded95d162b85f8ecd00ecd7c8849ca75@arsiamons.seed.evmos.org:26656
+
+## Peers
+
+#StakeLab
+- 06e3dfce2d729250e810bd5605ad7f05f3b1fc2c@75.119.155.119:26656
