@@ -2,12 +2,8 @@
 
 # Testnets
 
-This repo contains genesis files for the Evmos Testnets.
+This repo contains genesis files for the [Evmos](https://github.com/tharsis/evmos) Testnets.
 
-The latest testnet is Arsia Mons.
+The latest testnet is [Arsia Mons](./arsia_mons). There you can find a list of [seeds](https://docs.tendermint.com/master/tendermint-core/using-tendermint.html#seed) and [peers](https://docs.tendermint.com/master/tendermint-core/using-tendermint.html#persistent-peer) to connect to.
 
-[Join the testnet](https://evmos.dev/testnet/join.html).
-
-## Seeds
-
-- c36cec90ded95d162b85f8ecd00ecd7c8849ca75@arsiamons.seed.evmos.org:26656
+For the full instructions on how to [join the testnet](https://evmos.dev/testnet/join.html), please refer to the official [documentation](https://evmos.dev).
