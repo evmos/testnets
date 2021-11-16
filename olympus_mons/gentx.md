@@ -1,4 +1,6 @@
-# Evmos Incentivized Testnet Gentx
+# Evmos Incentivized Testnet 
+
+Thank you for becoming a genesis validator on Evmos! This guide will provide instructions on setting up a node, submitting a gentx, and other tasks needed to participate in the launch of the Evmos Olympus Mons incentivized testnet.
 
 A `gentx` does three things:
 
@@ -6,37 +8,46 @@ A `gentx` does three things:
 - Self-delegates the provided amount of staking tokens.
 - Links the operator account with a Tendermint node pubkey that will be used for signing blocks. If no `--pubkey` flag is provided, it defaults to the local node pubkey created via the `evmosd init` command.
 
+## Setup
+
 Software:
 
 - Go version: [v1.17+](https://golang.org/dl/)
 - Evmos version: [v0.2.x](https://github.com/tharsis/evmos/releases)
 
-## genesis params (changed from default)
+To verify that Go is installed:
 
-```json
-"max_validators": 300
-"send_enabled": false
-"receive_enabled": false
-"signed_blocks_window": "10000"
-"min_signed_per_window": "0.050000000000000000"
-"unbonding_time": "86400s"
-"voting_period": "86400s"
+```sh
+go version
+# Should return go version go1.17 linux/amd64
 ```
 
-- You have to keep up at least 5% in the last 10000block for avoid downtime slashing.
-- You have to wait 3days to unbond your token.
+## Instructions (Until November 19, 2021 12:00 PST)
 
-## GenTx Collection (Until October 16, 2021 11:59 UTC End)
+These instructions are written targeting an Ubuntu 20.04 system.  Relevant changes to commands should be made depending on the OS/architecture you are running on.
 
 1. Install `evmosd`
 
    ```bash
    git clone https://github.com/tharsis/evmos
-   cd evmos && git checkout -b XXX tags/XXXXX
+   cd evmos && git checkout tags/v0.2.x -b <YOUR_BRANCH_NAME>
    make install
    ```
 
-   Make sure to checkout to `XXXXX` tag.
+   Make sure to checkout to some `v0.2.x` tag.
+
+   Verify that everything is OK. If you get something *like* the following, you've successfully installed Evmos on your system.
+
+   ```sh
+   evmosd version --long
+
+   name: evmos
+   server_name: evmosd
+   version: '"0.1.3"'
+   commit: 7ad7715c59ec38fd19c06de54d03a982afebf961
+   build_tags: netgo,ledger
+   go: go version go1.17 darwin/amd64
+   ```
 
 2. Initialize the `evmosd` directories and create the local file with the correct chain-id
 
