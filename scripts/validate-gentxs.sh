@@ -18,15 +18,15 @@ GENTXS_DIR= $GOPATH/github.com/tharsis/testnets/olympus_mons/gentxs"
 echo
 
 if [[ -z "${GH_URL}" ]]; then
-  echo "GH_URL in not set, required. Ex: https://github.com/cosmos/cosmos-sdk"
+  echo "GH_URL in not set, required. Ex: https://github.com/tharsis/evmos"
   exit 0
 fi
 if [[ -z "${DAEMON}" ]]; then
-  echo "DAEMON is not set, required. Ex: simd, gaiad etc"
+  echo "DAEMON is not set, required. Ex: evmosd, gaiad etc"
   exit 0
 fi
 if [[ -z "${DENOM}" ]]; then
-  echo "DENOM in not set, required. Ex: stake, uatom etc"
+  echo "DENOM in not set, required. Ex: stake, aphoton etc"
   exit 0
 fi
 if [[ -z "${GO_VERSION}" ]]; then
