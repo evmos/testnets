@@ -14,4 +14,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: gentx-validation
         run: |
-          bash -x ./scripts/verify-gentxs.sh
+          bash -x ./scripts/validate-gentxs.sh
