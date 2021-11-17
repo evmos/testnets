@@ -1,6 +1,6 @@
-# Arsia Mons Testnet
+# Olympus Mons Testnet
 
-![cover](https://user-images.githubusercontent.com/8366960/136831207-5621f14c-1505-4ada-8b1e-13d0515709a4.png)
+![cover](/img/olympus_mons.png)
 
 ## Instructions
 
@@ -8,12 +8,24 @@ Follow the instructions on the official documentation to [join the testnet](http
 
 ## Details
 
-- Network Chain ID: `evmos_9000-1`
+- Network Chain ID: `evmos_9000-2`
 - EIP155 Chain ID: `9000`
-- `evmosd` version: [`v0.1.x`](https://github.com/tharsis/evmos/releases)
+- `evmosd` version: [`v0.2.x`](https://github.com/tharsis/evmos/releases)
 - Faucet: [faucet.evmos.org](https://faucet.evmos.org)
 - EVM explorer: [evm.evmos.org](https://evm.evmos.org)
 - Cosmos explorer: [explorer.evmos.org](https://explorer.evmos.org)
+
+## Schedule
+
+### Application Period
+
+Submissions open on November 17, 2021 14:00 PST, participants are required to [submit gentx](./gentx.md).
+
+Submissions close on November 19, 2021 12:00 PST.
+
+### Genesis Launch
+
+November 19, 2021 14:00 PST.
 
 ## Seeds & Peers
 
