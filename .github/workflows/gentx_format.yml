@@ -1,0 +1,17 @@
+
+name: Gentx Format
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  verify-gentx:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: gentx-validation
+        run: |
+          bash -x ./scripts/validate-gentxs.sh
