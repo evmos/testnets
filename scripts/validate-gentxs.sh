@@ -12,71 +12,32 @@ CHAIN_ID= evmos_9000-2
 DENOM= aphoton
 GH_URL= https://github.com/tharsis/evmos
 BINARY_VERSION= v0.2.0
-GO_VERSION=1.17
-PRELAUNCH_GENESIS_URL= https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json
-GENTXS_DIR= $GOPATH/github.com/tharsis/testnets/olympus_mons/gentxs"
+PRELAUNCH_GENESIS_URL= https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json"
 echo
 
 if [[ -z "${GH_URL}" ]]; then
   echo "GH_URL in not set, required. Ex: https://github.com/tharsis/evmos"
-  exit 0
+  exit 1
 fi
 if [[ -z "${DAEMON}" ]]; then
   echo "DAEMON is not set, required. Ex: evmosd, gaiad etc"
-  exit 0
+  exit 1
 fi
 if [[ -z "${DENOM}" ]]; then
   echo "DENOM in not set, required. Ex: stake, aphoton etc"
-  exit 0
-fi
-if [[ -z "${GO_VERSION}" ]]; then
-  echo "GO_VERSION in not set, required. Ex: 1.15.2, 1.16.6 etc."
-  exit 0
+  exit 1
 fi
 if [[ -z "${CHAIN_ID}" ]]; then
   echo "CHAIN_ID in not set, required."
-  exit 0
+  exit 1
 fi
 if [[ -z "${PRELAUNCH_GENESIS_URL}" ]]; then
   echo "PRELAUNCH_GENESIS_URL (genesis file url) in not set, required."
-  exit 0
+  exit 1
 fi
 if [[ -z "${GENTXS_DIR}" ]]; then
   echo "GENTXS_DIR in not set, required."
-  exit 0
-fi
-
-command_exists () {
-    type "$1" &> /dev/null ;
-}
-
-if command_exists go ; then
-    echo "Golang is already installed"
-else
-  read -s -p "Installing go using apt. Do you want to proceed (y/n)?: " useApt
-
-  if [ "$useApt" != "y" ]; then
-    echo
-    echo "Install go manually and execute this script"
-    exit 0;
-  fi
-
-  sudo apt update
-  sudo apt install build-essential -y
-
-  wget https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz
-  tar -xvf go$GO_VERSION.linux-amd64.tar.gz
-  sudo mv go /usr/local
-
-  echo "" >> ~/.profile
-  echo 'export GOPATH=$HOME/go' >> ~/.profile
-  echo 'export GOROOT=/usr/local/go' >> ~/.profile
-  echo 'export GOBIN=$GOPATH/bin' >> ~/.profile
-  echo 'export PATH=$PATH:/usr/local/go/bin:$GOBIN' >> ~/.profile
-
-  . ~/.profile
-
-  go version
+  exit 1
 fi
 
 if [ "$(ls -A $GENTXS_DIR)" ]; then
