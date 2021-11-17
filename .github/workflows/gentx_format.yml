@@ -24,5 +24,5 @@ jobs:
           DENOM: aphoton
           GH_URL: https://github.com/tharsis/evmos
           BINARY_VERSION: v0.2.0
-          PRELAUNCH_GENESIS_URL: https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json
+          PRELAUNCH_GENESIS_URL: https://raw.githubusercontent.com/tharsis/testnets/dbc34b02959c77a5a6771fa9439de4c955785e10/olympus_mons/genesis.json
           GENTXS_DIR: ${{ github.workspace }}/olympus_mons/gentxs
