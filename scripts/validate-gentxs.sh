@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DAEMON_HOME="/tmp/simd$(date +%s)"
+DAEMON_HOME="/tmp/evmosd$(date +%s)"
 RANDOM_KEY="randomvalidatorkey"
 
 echo "#############################################"
