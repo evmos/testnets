@@ -12,7 +12,8 @@ CHAIN_ID= evmos_9000-2
 DENOM= aphoton
 GH_URL= https://github.com/tharsis/evmos
 BINARY_VERSION= v0.2.0
-PRELAUNCH_GENESIS_URL= https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json"
+PRELAUNCH_GENESIS_URL= https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json
+GENTXS_DIR= $GOPATH/github.com/tharsis/testnets/olympus_mons/gentxs"
 echo
 
 if [[ -z "${GH_URL}" ]]; then
