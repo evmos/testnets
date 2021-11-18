@@ -2,7 +2,8 @@ name: "Re-trigger Workflows on open PRs"
 
 on:
   push:
-    # Here you can limit the branches where you want this action to be run
+    branches:
+      - main
   
 jobs:
   retrigger-workflows-on-open-prs:
