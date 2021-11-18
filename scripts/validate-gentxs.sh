@@ -51,7 +51,7 @@ else
 
     git clone $GH_URL
     cd evmos
-    git checkout tag/v0.2.0
+    git checkout tags/v0.2.0
     make build
     chmod +x ./build/evmosd
 
