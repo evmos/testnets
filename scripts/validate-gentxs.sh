@@ -102,16 +102,16 @@ else
 
     ./build/evmosd validate-genesis --home $EVMOS_HOME
 
-    echo "..........Starting node......."
-    ./build/evmosd start --home $EVMOS_HOME &
+    # echo "..........Starting node......."
+    # ./build/evmosd start --home $EVMOS_HOME &
 
-    sleep 180s
+    # sleep 180s
 
-    echo "...checking network status.."
+    # echo "...checking network status.."
 
-    ./build/evmosd status --node http://localhost:26657
+    # ./build/evmosd status --node http://localhost:26657
 
     echo "...Cleaning the stuff..."
-    killall evmosd >/dev/null 2>&1
+    # killall evmosd >/dev/null 2>&1
     rm -rf $EVMOS_HOME >/dev/null 2>&1
 fi
