@@ -19,13 +19,11 @@ Follow the instructions on the official documentation to [join the testnet](http
 
 ### Application Period
 
-Submissions open on November 17, 2021 14:00 PST, participants are required to [submit gentx](./gentx.md).
-
-Submissions close on November 19, 2021 12:00 PST.
+Until November 17, 2021 11:00 PST, participants are required to [submit gentx](./gentx.md).
 
 ### Genesis Launch
 
-November 19, 2021 14:00 PST.
+November 17, 2021 13:00 PST.
 
 ## Seeds & Peers
 
