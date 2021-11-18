@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: jolube/retrigger-workflows-on-open-prs@master
+      - uses: jolube/re-run-open-prs-on-base-update@master
         with:
           github_token: ${{ secrets.gentx }}
