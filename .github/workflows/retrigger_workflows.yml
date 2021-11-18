@@ -2,13 +2,14 @@ name: "Re-trigger Workflows on open PRs"
 
 on:
   push:
-    # Here you can limit the branches where you want this action to be run
+    branches:
+      - main
   
 jobs:
   retrigger-workflows-on-open-prs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: tiagobento/retrigger-workflows-on-open-prs@master
+      - uses: vanstinator/re-run-open-prs-on-base-update@v1.2.0
         with:
-          github_token: ${{ secrets.gentx }}
+          github_token: ${{ secrets.GENTX }}
