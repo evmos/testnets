@@ -85,6 +85,8 @@ else
         echo "bonded too much: $amountquery > $MAXBOND"
         exit 1
     fi
+    
+    $DAEMON add-genesis-account $GENACC 1000000000000000$DENOM --home $DAEMON_HOME
 
     ./build/evmosd add-genesis-account $RANDOM_KEY 100000000000000$DENOM --home $EVMOS_HOME \
         --keyring-backend test
