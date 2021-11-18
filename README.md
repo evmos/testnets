@@ -1,14 +1,9 @@
-![cover](https://user-images.githubusercontent.com/8366960/136831207-5621f14c-1505-4ada-8b1e-13d0515709a4.png)
-
 # Testnets
 
-This repo contains genesis files for the Evmos Testnets.
+This repo contains genesis files for the [Evmos](https://github.com/tharsis/evmos) Testnets.
 
-The latest testnet is Arsia Mons.
+The latest testnet is [Olympus Mons](./olympus_mons). You can find a list of [seeds](https://docs.tendermint.com/master/tendermint-core/using-tendermint.html#seed) and [peers](https://docs.tendermint.com/master/tendermint-core/using-tendermint.html#persistent-peer) to connect to in the respective directory.
 
-[Join the testnet](https://evmos.dev/testnet/join.html).
+[Arsia Mons](./arsia_mons) is the deprecated testnet which ran from 2021-10-07 to 2021-11-17.
 
-## Seeds
-
-- c36cec90ded95d162b85f8ecd00ecd7c8849ca75@arsiamons.seed.evmos.org:26656
-- 3787335176bbb91bf14a67724ebe0f0940ca5afb@evmos-seed.artifact-staking.io:26656
+For the full instructions on how to [join the testnet](https://evmos.dev/testnet/join.html), please refer to the official [documentation](https://evmos.dev).
