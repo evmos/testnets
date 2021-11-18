@@ -105,7 +105,7 @@ else
     echo "..........Starting node......."
     ./build/evmosd start --home $EVMOS_HOME &
 
-    sleep 1800s
+    sleep 180s
 
     echo "...checking network status.."
 
