@@ -12,5 +12,4 @@ jobs:
     steps:
       - uses: vanstinator/re-run-open-prs-on-base-update@v1.2.0
         with:
-          github_token: ${{ secrets.gentx }}
-          skip_failed_runs: false
+          github_token: ${{ secrets.GENTX }}
