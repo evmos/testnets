@@ -1,4 +1,3 @@
-
 name: Gentx Format
 on:
   push:
@@ -12,6 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.17'
+      - run: go version
       - name: gentx-validation
         run: |
           bash -x ./scripts/validate-gentxs.sh
+        env:
+          DAEMON: evmosd
+          CHAIN_ID: evmos_9000-2
+          DENOM: aphoton
+          GH_URL: https://github.com/tharsis/evmos
+          BINARY_VERSION: v0.2.0
+          PRELAUNCH_GENESIS_URL: https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json
+          GENTXS_DIR: ${{ github.workspace }}/olympus_mons/gentxs
