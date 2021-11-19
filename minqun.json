@@ -1,0 +1,49 @@
+{
+  "body": {
+    "messages": [
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+        "description": {
+          "moniker": "minqun",
+          "identity": "",
+          "website": "",
+          "security_contact": "",
+          "details": ""
+        },
+        "commission": {
+          "rate": "0.100000000000000000",
+          "max_rate": "1.000000000000000000",
+          "max_change_rate": "0.100000000000000000"
+        },
+        "min_self_delegation": "1",
+        "delegator_address": "evmos1ertnk2m25859zk88tyycgv8msy5twsms4z6ynm",
+        "validator_address": "evmosvaloper1ertnk2m25859zk88tyycgv8msy5twsmscv45jx",
+        "pubkey": {
+          "@type": "/cosmos.crypto.ed25519.PubKey",
+          "key": "lnVHIp5CTNY2VMmZhT+4+iC2mIl4vVA/Emq07kX84S0="
+        },
+        "value": { "denom": "aphoton", "amount": "1000000000000" }
+      }
+    ],
+    "memo": "e226401094cdf7087af02a65d6a895e686c747d8@75.119.146.141:26656",
+    "timeout_height": "0",
+    "extension_options": [],
+    "non_critical_extension_options": []
+  },
+  "auth_info": {
+    "signer_infos": [
+      {
+        "public_key": {
+          "@type": "/ethermint.crypto.v1.ethsecp256k1.PubKey",
+          "key": "AlYiY74pNKCDnEiTLpa/MXpBT3gBZVao7HHqt4MRgyiR"
+        },
+        "mode_info": { "single": { "mode": "SIGN_MODE_DIRECT" } },
+        "sequence": "0"
+      }
+    ],
+    "fee": { "amount": [], "gas_limit": "200000", "payer": "", "granter": "" }
+  },
+  "signatures": [
+    "kKyoj7wZg0JvgJcXBNIahtROEwhgcoKJ8oA5Dq+uqsIujsO6KXklUKtS1desq+rnZM5YFLd2mdXXPV0nCXMtmwA="
+  ]
+}
