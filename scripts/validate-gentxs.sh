@@ -24,7 +24,7 @@ curl -s $PRELAUNCH_GENESIS_URL > $EVMOS_HOME/config/genesis.json.bak
 
 # Loop through the GenTx Files
 GENTX_FILES=$(find $GENTXS_DIR -iname "*.json")
-for GENTX_FILE in $GENTX_FILES
+for GENTX_FILE in GENTX_FILES
 do
     echo "GentxFile::::"
     echo $GENTX_FILE
