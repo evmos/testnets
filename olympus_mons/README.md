@@ -21,11 +21,11 @@ Follow the instructions on the official documentation to [join the testnet](http
 
 Submissions open on November 17, 2021 14:00 PST, participants are required to [submit gentx](./gentx.md).
 
-Submissions close on November 19, 2021 12:00 PST.
+Submissions close on November 18, 2021 17:00 PST.
 
 ### Genesis Launch
 
-November 19, 2021 14:00 PST.
+November 19, 2021 08:00 PST.
 
 ## Seeds & Peers
 
