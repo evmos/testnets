@@ -20697,7 +20697,7 @@
             "params": {
                 "enable_intrarelayer": true,
                 "token_pair_voting_period": "86400s",
-                "enable_evm_hook": true
+                "enable_e_v_m_hook": true
             },
             "token_pairs": []
         },
