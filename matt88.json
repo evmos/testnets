@@ -1,0 +1,49 @@
+{
+  "body": {
+    "messages": [
+      {
+        "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+        "description": {
+          "moniker": "matt88",
+          "identity": "",
+          "website": "",
+          "security_contact": "",
+          "details": ""
+        },
+        "commission": {
+          "rate": "0.100000000000000000",
+          "max_rate": "1.000000000000000000",
+          "max_change_rate": "0.100000000000000000"
+        },
+        "min_self_delegation": "1",
+        "delegator_address": "evmos1r5ajur9mtqhexa9shvd4h2m8vxz9xt56gnzd33",
+        "validator_address": "evmosvaloper1r5ajur9mtqhexa9shvd4h2m8vxz9xt569adasv",
+        "pubkey": {
+          "@type": "/cosmos.crypto.ed25519.PubKey",
+          "key": "AVh6nqmXA3sMWZop6nAcBDVK6qWvdXiu+f0VnYHAMQM="
+        },
+        "value": { "denom": "aphoton", "amount": "1000000000000" }
+      }
+    ],
+    "memo": "02f439276336808b2366393fff95ebaafa326c3d@75.119.146.142:26656",
+    "timeout_height": "0",
+    "extension_options": [],
+    "non_critical_extension_options": []
+  },
+  "auth_info": {
+    "signer_infos": [
+      {
+        "public_key": {
+          "@type": "/ethermint.crypto.v1.ethsecp256k1.PubKey",
+          "key": "AhV6TxvWnvVj3BtTwZShkfw0aV2X5dfC/OtC8p3gWmWC"
+        },
+        "mode_info": { "single": { "mode": "SIGN_MODE_DIRECT" } },
+        "sequence": "0"
+      }
+    ],
+    "fee": { "amount": [], "gas_limit": "200000", "payer": "", "granter": "" }
+  },
+  "signatures": [
+    "RzxhG2gB6hnD8AIJHDQw+RjAXvoXroJ3wS5RDxLnKhkIq9WnPjlBEG9v5iQQWVSsSw9M++vqbrchDaTAnyp2UwE="
+  ]
+}
