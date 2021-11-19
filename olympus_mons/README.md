@@ -14,7 +14,7 @@ Verify the SHA256 checksum using:
 
 ```bash
 sha256sum  genesis.json
-# b5c4ca07af2387c23bce925372406b9dc3e75b3b7816779f0508d96411550ebd genesis.json
+# 79048ea12a5a31f40a12f7f8be98bb1acb3d1ba70c0ba4549f6154b7f1ab9fca genesis.json
 ```
 
 ## Details
