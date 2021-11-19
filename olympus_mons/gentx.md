@@ -22,7 +22,7 @@ go version
 # Should return go version go1.17 linux/amd64
 ```
 
-## Instructions (Until November 19, 2021 12:00 PST)
+## Instructions (Until November 19, 2021 12AM PST)
 
 These instructions are written targeting an Ubuntu 20.04 system.  Relevant changes to commands should be made depending on the OS/architecture you are running on.
 
