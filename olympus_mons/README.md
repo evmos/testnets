@@ -6,6 +6,17 @@
 
 Follow the instructions on the official documentation to [join the testnet](https://evmos.dev/testnet/join.html) and how to obtain tokens using the [faucet](https://evmos.dev/testnet/faucet.html).
 
+## Genesis File
+
+Download your [genesis.json](./genesis.json)
+
+Verify the SHA256 checksum using:
+
+```bash
+sha256sum  genesis.json
+# fcfb4c09c894b1db402c09e9b0d2176a0266955b68312cc0b627818e9d9471fa genesis.json
+```
+
 ## Details
 
 - Network Chain ID: `evmos_9000-2`
@@ -25,8 +36,4 @@ Submissions close on November 18, 2021 17:00 PST.
 
 ### Genesis Launch
 
-November 19, 2021 08:00 PST.
-
-## Seeds & Peers
-
-You can find seeds & peers on the [seeds.txt](./seeds.txt) and [peers.txt](./peers.txt) files, respectively. If you want to share your seed or peer, please fork this repo and and add it to the bottom of the corresponding `.txt` file.
+November 20, 2021 18:00 UTC.
