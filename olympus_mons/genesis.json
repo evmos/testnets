@@ -1426,15 +1426,6 @@
             }, {
                 "@type": "/ethermint.types.v1.EthAccount",
                 "base_account": {
-                    "address": "evmos1az0eeqw5222en0enxz9ect3s8xy4kayz7khcn2",
-                    "pub_key": null,
-                    "account_number": "0",
-                    "sequence": "0"
-                },
-                "code_hash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
-            }, {
-                "@type": "/ethermint.types.v1.EthAccount",
-                "base_account": {
                     "address": "evmos14lzju8ehq4px3n03nwsr28fuqqt9wvjzxhptlj",
                     "pub_key": null,
                     "account_number": "0",
@@ -4386,12 +4377,6 @@
                     "amount": "1000000000000"
                 }]
             }, {
-                "address": "evmos1az0eeqw5222en0enxz9ect3s8xy4kayz7khcn2",
-                "coins": [{
-                    "denom": "aphoton",
-                    "amount": "1000000000000"
-                }]
-            }, {
                 "address": "evmos1agw0ngwcnxmytm5yt9y3sd6pvs5rqq5vhkj3w4",
                 "coins": [{
                     "denom": "aphoton",
@@ -4526,7 +4511,7 @@
             }],
             "supply": [{
                 "denom": "aphoton",
-                "amount": "100501000000303010000000000"
+                "amount": "100501000000302010000000000"
             }],
             "denom_metadata": []
         },
@@ -12810,61 +12795,7 @@
                     }
                 },
                 "signatures": ["pVvc017YTdxcsvS/v5uI3I/wrXvk7JJY3Wg35Xp5R20LSE+btMQwyvj4RFpda8Yp8O/8VLZScAxm6ZkCradRxAA="]
-            }, {
-                "body": {
-                    "messages": [{
-                        "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
-                        "description": {
-                            "moniker": "devops_mne",
-                            "identity": "",
-                            "website": "",
-                            "security_contact": "",
-                            "details": ""
-                        },
-                        "commission": {
-                            "rate": "0.100000000000000000",
-                            "max_rate": "1.000000000000000000",
-                            "max_change_rate": "0.100000000000000000"
-                        },
-                        "min_self_delegation": "1",
-                        "delegator_address": "evmos1az0eeqw5222en0enxz9ect3s8xy4kayz7khcn2",
-                        "validator_address": "evmosvaloper1az0eeqw5222en0enxz9ect3s8xy4kayznccgjh",
-                        "pubkey": {
-                            "@type": "/cosmos.crypto.ed25519.PubKey",
-                            "key": "DOeVyagZNqyleMOVlvvAbFzUuYWk7flZ1gIgwnmsXXk="
-                        },
-                        "value": {
-                            "denom": "aphoton",
-                            "amount": "1000000000000"
-                        }
-                    }],
-                    "memo": "8e4358354d6284124d188d3bddfa191d1fb04b09@62.171.149.212:26656",
-                    "timeout_height": "0",
-                    "extension_options": [],
-                    "non_critical_extension_options": []
-                },
-                "auth_info": {
-                    "signer_infos": [{
-                        "public_key": {
-                            "@type": "/ethermint.crypto.v1.ethsecp256k1.PubKey",
-                            "key": "A31VZHuFcz4Suumj67SoFwfH90orCCpmVEEddof7oeoc"
-                        },
-                        "mode_info": {
-                            "single": {
-                                "mode": "SIGN_MODE_DIRECT"
-                            }
-                        },
-                        "sequence": "0"
-                    }],
-                    "fee": {
-                        "amount": [],
-                        "gas_limit": "200000",
-                        "payer": "",
-                        "granter": ""
-                    }
-                },
-                "signatures": ["KdqECMNW+AEa3GWx8gPe6CQBn3/ovN8iGVU9GakThcl9ID2oIII4cwIp0nFZxtywAxKQ9BkPCztxAQSxQg1U0gE="]
-            }, {
+            },  {
                 "body": {
                     "messages": [{
                         "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
