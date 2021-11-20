@@ -2287,16 +2287,7 @@
                     "sequence": "0"
                 },
                 "code_hash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
-            }, {
-                "@type": "/ethermint.types.v1.EthAccount",
-                "base_account": {
-                    "address": "evmos1a36r4jvcprvewxnr2qhfs0h4spec35232798lk",
-                    "pub_key": null,
-                    "account_number": "0",
-                    "sequence": "0"
-                },
-                "code_hash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
-            }, {
+            },  {
                 "@type": "/ethermint.types.v1.EthAccount",
                 "base_account": {
                     "address": "evmos1vvjw4652wfnkn596va77ltewe02mkf7qju3rsz",
@@ -4394,13 +4385,7 @@
                     "denom": "aphoton",
                     "amount": "1000000000000"
                 }]
-            }, {
-                "address": "evmos1a36r4jvcprvewxnr2qhfs0h4spec35232798lk",
-                "coins": [{
-                    "denom": "aphoton",
-                    "amount": "1000000000000"
-                }]
-            }, {
+            },  {
                 "address": "evmos1ajj4m6smku75aecasrczutwffktfmsclll60eh",
                 "coins": [{
                     "denom": "aphoton",
@@ -4511,7 +4496,7 @@
             }],
             "supply": [{
                 "denom": "aphoton",
-                "amount": "100501000000302010000000000"
+                "amount": "100501000000301010000000000"
             }],
             "denom_metadata": []
         },
@@ -18033,61 +18018,7 @@
                     }
                 },
                 "signatures": ["Pwzfp/I82Zh1K5ZxRCTbmpbwcUFkNQ82of+lhi+rzJA9wiorR7dF0zEovOLJLV6EuzGZkGitJ/kvtAUJ7JPGdwE="]
-            }, {
-                "body": {
-                    "messages": [{
-                        "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
-                        "description": {
-                            "moniker": "Simply Staking",
-                            "identity": "",
-                            "website": "www.simply-vc.com.mt",
-                            "security_contact": "",
-                            "details": ""
-                        },
-                        "commission": {
-                            "rate": "0.100000000000000000",
-                            "max_rate": "1.000000000000000000",
-                            "max_change_rate": "0.100000000000000000"
-                        },
-                        "min_self_delegation": "1",
-                        "delegator_address": "evmos1a36r4jvcprvewxnr2qhfs0h4spec35232798lk",
-                        "validator_address": "evmosvaloper1a36r4jvcprvewxnr2qhfs0h4spec35238s2h7t",
-                        "pubkey": {
-                            "@type": "/cosmos.crypto.ed25519.PubKey",
-                            "key": "dIdH6BrW/AGeTogQfYMyu+1T2SRX3wlCo93GA81goDg="
-                        },
-                        "value": {
-                            "denom": "aphoton",
-                            "amount": "1000000000000"
-                        }
-                    }],
-                    "memo": "2603f54a577a0a278d20dc87c37a6aa713fe4eaa@172.26.10.32:26656",
-                    "timeout_height": "0",
-                    "extension_options": [],
-                    "non_critical_extension_options": []
-                },
-                "auth_info": {
-                    "signer_infos": [{
-                        "public_key": {
-                            "@type": "/ethermint.crypto.v1.ethsecp256k1.PubKey",
-                            "key": "Ax/f0+L/dc7s9D7VrEaeK2oNr+eAC2XVAiPFA1U2P51p"
-                        },
-                        "mode_info": {
-                            "single": {
-                                "mode": "SIGN_MODE_DIRECT"
-                            }
-                        },
-                        "sequence": "0"
-                    }],
-                    "fee": {
-                        "amount": [],
-                        "gas_limit": "200000",
-                        "payer": "",
-                        "granter": ""
-                    }
-                },
-                "signatures": ["nMjx5kipvPyZRnEXIr3UhZKFeijoIgg0hzJjRXTfWfF/p7qagmTrref/ntXkZFlMLMfSuojhUCXrR4PN28yfhAA="]
-            }, {
+            },  {
                 "body": {
                     "messages": [{
                         "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
