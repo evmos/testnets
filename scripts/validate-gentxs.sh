@@ -3,7 +3,7 @@ EVMOS_HOME="/tmp/evmosd$(date +%s)"
 RANDOM_KEY="randomevmosvalidatorkey"
 CHAIN_ID="evmos_9000-2"
 DENOM="aphoton"
-MAXBOND="50000000000000" # 500 Million PHOTON - TODO: check if correct
+MAXBOND="1000000000000" # 1 PHOTON
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.2.0"
@@ -79,9 +79,9 @@ do
     fi
 
     # limit the amount that can be bonded
-    if [ "$amountquery" -gt $MAXBOND ]; then
-        echo "bonded too much: $amountquery > $MAXBOND" # TODO: double check this, not sure if correct
-        exit 1
+    if [ $amountquery -gt $MAXBOND ]; then
+        echo "bonded too much: $amountquery > $MAXBOND on $GENTX_FILE" | tee -a bad_gentxs.out # TODO: double check this, not sure if correct
+        continue
     fi
     # TODO could add checks for commission rate but will be caught by evmosd start
     # check for duplicate accounts
@@ -89,8 +89,6 @@ do
     if contains "$OUTPUT" "Error"; then
         echo "add-genesis-account failed on $GENTX_FILE" | tee -a bad_gentxs.out
         continue
-    else
-        echo "$OUTPUT"
     fi 
 
     $DAEMON add-genesis-account $RANDOM_KEY 100000000000000$DENOM --home "$EVMOS_HOME" \
@@ -102,7 +100,8 @@ do
     cp "$GENTX_FILE" "$EVMOS_HOME"/config/gentx/
 
     echo "Collecting gentxs"
-    if ! $DAEMON collect-gentxs --home "$EVMOS_HOME"; then
+    OUTPUT=$($DAEMON collect-gentxs --home "$EVMOS_HOME" 2>&1 || true)
+    if contains "$OUTPUT" "Error"; then
         echo "collect-gentxs failed on $GENTX_FILE" | tee -a bad_gentxs.out
         # remove gentxs and reset genesis
         rm -rf "$EVMOS_HOME"/config/gentx/*.json
@@ -128,7 +127,7 @@ do
 
     # TODO: RUN COMMAND IN BACKGROUND BUT IF THERE'S A PANIC WE CAN SEND IT TO THE FILE
 
-    sleep 5 # TODO: change to 5s when pushing
+    sleep 3 # TODO: change to 5s when pushing
 
     echo "Checking the status of the network"
     OUTPUT=$($DAEMON status --node http://localhost:26657 2>&1 || true)
@@ -136,6 +135,7 @@ do
         PANIC=$(grep "panic" "$TMPFILE")
         echo "status check (faulty params or signatures, $PANIC) failed on $GENTX_FILE" | tee -a bad_gentxs.out
     else 
+        echo $OUTPUT
         echo "Killing the daemon"
         killall evmosd >/dev/null 2>&1
     fi
@@ -147,6 +147,7 @@ do
     rm -rf "$EVMOS_HOME"/config/genesis.json
     cp "$EVMOS_HOME"/config/genesis.json.bak "$EVMOS_HOME"/config/genesis.json
     $DAEMON unsafe-reset-all
+
 done
 
 echo "Cleaning the files"
