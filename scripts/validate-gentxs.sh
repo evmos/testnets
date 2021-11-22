@@ -12,9 +12,25 @@ GENTXS_DIR="$HOME/testnets/olympus_mons/gentxs"
 # NOTE: This script is designed to run locally. We need to just adjust the one for CI. Not sure if the CI machine has `sponge`
 # On MacOS, I use gsed instead of sed.
 
+# contains(string, substring)
+#
+# Returns 0 if the specified string contains the specified substring,
+# otherwise returns 1.
+contains() {
+    string="$1"
+    substring="$2"
+    if test "${string#*$substring}" != "$string"
+    then
+        return 0    # $substring is in $string
+    else
+        return 1    # $substring is not in $string
+    fi
+}
+
 set -e
 echo "Cloning the Evmos repo and building $BINARY_VERSION"
 
+rm -rf evmos
 git clone $GH_URL
 cd evmos
 git checkout tags/$BINARY_VERSION
@@ -45,7 +61,6 @@ done
 GENTX_FILES=$(find "$GENTXS_DIR" -type f -regex "[^ ]*.json")
 for GENTX_FILE in $GENTX_FILES
 do
-    GENTX_FILE="/Users/akash/testnets/olympus_mons/gentxs/andyev.json"
     echo "Processing gentx file::"
     echo "$GENTX_FILE"
     
@@ -68,21 +83,15 @@ do
         echo "bonded too much: $amountquery > $MAXBOND" # TODO: double check this, not sure if correct
         exit 1
     fi
-
     # TODO could add checks for commission rate but will be caught by evmosd start
     # check for duplicate accounts
-    OUTPUT=$($DAEMON add-genesis-account "$GENACC" 1000000000000000$DENOM --home "$EVMOS_HOME" 2>&1)
-    echo $OUTPUT
-    EXIT_CODE=$?
-    echo $EXIT_CODE
-    if [ "$EXIT_CODE" != 0 ]; then
-        if echo "$OUTPUT" | grep -q "cannot add account at existing address"; then
-            echo "add-genesis-account failed (account <$GENACC> already exists) on $GENTX_FILE" | tee -a bad_gentxs.out
-        else
-            echo "add-genesis-account failed ($OUTPUT) on $GENTX_FILE" | tee -a bad_gentxs.out
-        fi 
+    OUTPUT=$($DAEMON add-genesis-account "$GENACC" 1000000000000000$DENOM --home "$EVMOS_HOME" 2>&1 || true)
+    if contains "$OUTPUT" "Error"; then
+        echo "add-genesis-account failed on $GENTX_FILE" | tee -a bad_gentxs.out
         continue
-    fi
+    else
+        echo "$OUTPUT"
+    fi 
 
     $DAEMON add-genesis-account $RANDOM_KEY 100000000000000$DENOM --home "$EVMOS_HOME" \
         --keyring-backend test
