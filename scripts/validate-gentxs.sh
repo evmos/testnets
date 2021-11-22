@@ -9,6 +9,9 @@ GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.2.0"
 GENTXS_DIR="$HOME/testnets/olympus_mons/gentxs"
 
+# NOTE: This script is designed to run locally. We need to just adjust the one for CI. Not sure if the CI machine has `sponge`
+# On MacOS, I use gsed instead of sed.
+
 set -e
 echo "Cloning the Evmos repo and building $BINARY_VERSION"
 
@@ -31,10 +34,18 @@ cat "$EVMOS_HOME"/config/genesis.json
 echo "Making a genesis copy, as we are using it as a template for adding our gen txs"
 cp "$EVMOS_HOME"/config/genesis.json "$EVMOS_HOME"/config/genesis.json.bak
 
+# Don't allow GenTx file names with spaces
+echo "Get rid of spaces"
+find "$GENTXS_DIR" -type f -name "* *" | while read -r GENTX_FILE
+do
+    echo "whitespace on $GENTX_FILE; won't process" | tee -a bad_gentxs.out
+done
+
 # Process all the GenTx files, one at a time, so that we can detect which ones are flawed
-GENTX_FILES=$(find "$GENTXS_DIR" -iname "*.json")
+GENTX_FILES=$(find "$GENTXS_DIR" -type f -regex "[^ ]*.json")
 for GENTX_FILE in $GENTX_FILES
 do
+    GENTX_FILE="/Users/akash/testnets/olympus_mons/gentxs/andyev.json"
     echo "Processing gentx file::"
     echo "$GENTX_FILE"
     
@@ -48,17 +59,30 @@ do
 
     # only allow $DENOM tokens to be bonded
     if [ "$denomquery" != $DENOM ]; then
-        echo "invalid denomination"
-        exit 1
+        echo "incorrect denomination on $GENTX_FILE" | tee -a bad_gentxs.out
+        continue
     fi
 
     # limit the amount that can be bonded
     if [ "$amountquery" -gt $MAXBOND ]; then
-        echo "bonded too much: $amountquery > $MAXBOND"
+        echo "bonded too much: $amountquery > $MAXBOND" # TODO: double check this, not sure if correct
         exit 1
     fi
 
-    $DAEMON add-genesis-account "$GENACC" 1000000000000000$DENOM --home "$EVMOS_HOME"
+    # TODO could add checks for commission rate but will be caught by evmosd start
+    # check for duplicate accounts
+    OUTPUT=$($DAEMON add-genesis-account "$GENACC" 1000000000000000$DENOM --home "$EVMOS_HOME" 2>&1)
+    echo $OUTPUT
+    EXIT_CODE=$?
+    echo $EXIT_CODE
+    if [ "$EXIT_CODE" != 0 ]; then
+        if echo "$OUTPUT" | grep -q "cannot add account at existing address"; then
+            echo "add-genesis-account failed (account <$GENACC> already exists) on $GENTX_FILE" | tee -a bad_gentxs.out
+        else
+            echo "add-genesis-account failed ($OUTPUT) on $GENTX_FILE" | tee -a bad_gentxs.out
+        fi 
+        continue
+    fi
 
     $DAEMON add-genesis-account $RANDOM_KEY 100000000000000$DENOM --home "$EVMOS_HOME" \
         --keyring-backend test
@@ -69,10 +93,25 @@ do
     cp "$GENTX_FILE" "$EVMOS_HOME"/config/gentx/
 
     echo "Collecting gentxs"
-    $DAEMON collect-gentxs --home "$EVMOS_HOME"
+    if ! $DAEMON collect-gentxs --home "$EVMOS_HOME"; then
+        echo "collect-gentxs failed on $GENTX_FILE" | tee -a bad_gentxs.out
+        # remove gentxs and reset genesis
+        rm -rf "$EVMOS_HOME"/config/gentx/*.json
+        rm -rf "$EVMOS_HOME"/config/genesis.json
+        cp "$EVMOS_HOME"/config/genesis.json.bak "$EVMOS_HOME"/config/genesis.json
+        continue
+    fi
     gsed -i '/persistent_peers =/c\persistent_peers = ""' "$EVMOS_HOME"/config/config.toml # TODO: Should be sed, but gsed for local mac testing
 
-    $DAEMON validate-genesis --home "$EVMOS_HOME" || echo "validate-genesis failed on $GENTX_FILE" >> bad_gentxs.out
+    echo "Run validate-genesis on created genesis file"
+    if ! $DAEMON validate-genesis --home "$EVMOS_HOME"; then 
+        echo "validate-genesis failed on $GENTX_FILE" | tee -a bad_gentxs.out
+        # remove gentxs and reset genesis
+        rm -rf "$EVMOS_HOME"/config/gentx/*.json
+        rm -rf "$EVMOS_HOME"/config/genesis.json
+        cp "$EVMOS_HOME"/config/genesis.json.bak "$EVMOS_HOME"/config/genesis.json
+        continue
+    fi
 
     echo "Starting the node to get complete validation (module params, signatures, etc.)"
     $DAEMON start --home "$EVMOS_HOME" &
