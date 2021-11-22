@@ -7,7 +7,7 @@ MAXBOND="50000000000000" # 500 Million PHOTON - TODO: check if correct
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.2.0"
-GENTXS_DIR="$HOME/testnets/olympus_mons/gentxs"
+GENTXS_DIR="$HOME/testnets/olympus_mons/gentx-300"
 
 # NOTE: This script is designed to run locally. We need to just adjust the one for CI. Not sure if the CI machine has `sponge`
 # On MacOS, I use gsed instead of sed.
@@ -15,7 +15,7 @@ GENTXS_DIR="$HOME/testnets/olympus_mons/gentxs"
 # contains(string, substring)
 #
 # Returns 0 if the specified string contains the specified substring,
-# otherwise returns 1.
+# otherwise returns 1. POSIX Compliant.
 contains() {
     string="$1"
     substring="$2"
@@ -61,6 +61,7 @@ done
 GENTX_FILES=$(find "$GENTXS_DIR" -type f -regex "[^ ]*.json")
 for GENTX_FILE in $GENTX_FILES
 do
+    GENTX_FILE="/Users/akash/testnets/olympus_mons/gentx-300/TEOLIDER.json"
     echo "Processing gentx file::"
     echo "$GENTX_FILE"
     
@@ -123,17 +124,22 @@ do
     fi
 
     echo "Starting the node to get complete validation (module params, signatures, etc.)"
-    $DAEMON start --home "$EVMOS_HOME" &
+    TMPFILE=$(mktemp)
+    $DAEMON start --home "$EVMOS_HOME" > "$TMPFILE" 2>&1 &
 
     # TODO: RUN COMMAND IN BACKGROUND BUT IF THERE'S A PANIC WE CAN SEND IT TO THE FILE
 
     sleep 5 # TODO: change to 5s when pushing
 
     echo "Checking the status of the network"
-    $DAEMON status --node http://localhost:26657
-
-    echo "Killing the daemon"
-    killall evmosd >/dev/null 2>&1
+    OUTPUT=$($DAEMON status --node http://localhost:26657 2>&1 || true)
+    if contains "$OUTPUT" "Error"; then
+        PANIC=$(grep "panic" "$TMPFILE")
+        echo "status check (faulty params or signatures, $PANIC) failed on $GENTX_FILE" | tee -a bad_gentxs.out
+    else 
+        echo "Killing the daemon"
+        killall evmosd >/dev/null 2>&1
+    fi
 
     echo "Remove gentx files to process next ones"
     rm -rf "$EVMOS_HOME"/config/gentx/*.json
