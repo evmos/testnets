@@ -8,6 +8,7 @@ DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.2.0"
 GENTXS_DIR="$HOME/testnets/olympus_mons/gentx-300"
+TMPFILE=$(mktemp)
 
 # NOTE: This script is designed to run locally. We need to just adjust the one for CI. Not sure if the CI machine has `sponge`
 # On MacOS, I use gsed instead of sed.
@@ -27,31 +28,33 @@ contains() {
     fi
 }
 
+create_genesis_template() {
+    echo "Adding random validator key so that we can start the network ourselves" | boxes -d stone
+    $DAEMON keys add $RANDOM_KEY --keyring-backend test --home "$EVMOS_HOME" > /dev/null 2>&1
+    $DAEMON init --chain-id $CHAIN_ID validator --home "$EVMOS_HOME" > /dev/null 2>&1
+    
+    # Setting the genesis time earlier so that we can start the network in our test
+    gsed -i '/genesis_time/c\   \"genesis_time\" : \"2021-03-29T00:00:00Z\",' "$EVMOS_HOME"/config/genesis.json
+    # Update the various denoms in the genesis
+    jq -r --arg DENOM "$DENOM" '(..|objects|select(has("denom"))).denom |= $DENOM | .app_state.staking.params.bond_denom = $DENOM | .app_state.mint.params.mint_denom = $DENOM' "$EVMOS_HOME"/config/genesis.json | sponge "$EVMOS_HOME"/config/genesis.json
+}
+
 set -e
-echo "Cloning the Evmos repo and building $BINARY_VERSION"
+echo "Cloning the Evmos repo and building $BINARY_VERSION" | boxes -d stone
 
 rm -rf evmos
-git clone $GH_URL
+git clone $GH_URL > /dev/null 2>&1
 cd evmos
-git checkout tags/$BINARY_VERSION
-make build
+git checkout tags/$BINARY_VERSION > /dev/null 2>&1
+make build > /dev/null 2>&1
 chmod +x $DAEMON
 
-echo "Adding random validator key so that we can start the network ourselves"
-$DAEMON keys add $RANDOM_KEY --keyring-backend test --home "$EVMOS_HOME"
-$DAEMON init --chain-id $CHAIN_ID validator --home "$EVMOS_HOME"
 
-# Setting the genesis time earlier so that we can start the network in our test
-gsed -i '/genesis_time/c\   \"genesis_time\" : \"2021-03-29T00:00:00Z\",' "$EVMOS_HOME"/config/genesis.json
-# Update the various denoms in the genesis
-jq -r --arg DENOM "$DENOM" '(..|objects|select(has("denom"))).denom |= $DENOM | .app_state.staking.params.bond_denom = $DENOM | .app_state.mint.params.mint_denom = $DENOM' "$EVMOS_HOME"/config/genesis.json | sponge "$EVMOS_HOME"/config/genesis.json
-cat "$EVMOS_HOME"/config/genesis.json
-
-echo "Making a genesis copy, as we are using it as a template for adding our gen txs"
-cp "$EVMOS_HOME"/config/genesis.json "$EVMOS_HOME"/config/genesis.json.bak
+# echo "Making a genesis copy, as we are using it as a template for adding our gen txs"
+# cp "$EVMOS_HOME"/config/genesis.json "$EVMOS_HOME"/config/genesis.json.bak
 
 # Don't allow GenTx file names with spaces
-echo "Get rid of spaces"
+echo "Mark files with spaces, they are not allowed" | boxes -d stone
 find "$GENTXS_DIR" -type f -name "* *" | while read -r GENTX_FILE
 do
     echo "whitespace on $GENTX_FILE; won't process" | tee -a bad_gentxs.out
@@ -59,19 +62,20 @@ done
 
 # Process all the GenTx files, one at a time, so that we can detect which ones are flawed
 GENTX_FILES=$(find "$GENTXS_DIR" -type f -regex "[^ ]*.json")
-# GENTX_FILES="/Users/akash/testnets/olympus_mons/gentx-300/ArtiDS_Node.json /Users/akash/testnets/olympus_mons/gentx-300/TEOLIDER.json"
+GENTX_FILES="/Users/akash/testnets/olympus_mons/gentx-300/evmos_node.json /Users/akash/testnets/olympus_mons/gentx-300/ArtiDS_Node.json /Users/akash/testnets/olympus_mons/gentx-300/TEOLIDER.json"
 for GENTX_FILE in $GENTX_FILES
 do
-    echo "Processing gentx file::"
-    echo "$GENTX_FILE"
+    create_genesis_template
+    echo "Processing gentx file::$GENTX_FILE" | boxes -d stone
     
     GENACC=$(jq -r '.body.messages[0].delegator_address' "$GENTX_FILE")
     denomquery=$(jq -r '.body.messages[0].value.denom' "$GENTX_FILE")
     amountquery=$(jq -r '.body.messages[0].value.amount' "$GENTX_FILE")
 
-    echo $GENACC
-    echo $amountquery
-    echo $denomquery
+    # Helpful output
+    # echo $GENACC
+    # echo $amountquery
+    # echo $denomquery
 
     # only allow $DENOM tokens to be bonded
     if [ "$denomquery" != $DENOM ]; then
@@ -100,7 +104,7 @@ do
 
     cp "$GENTX_FILE" "$EVMOS_HOME"/config/gentx/
 
-    echo "Collecting gentxs"
+    echo "Collecting gentxs" | boxes -d stone
     OUTPUT=$($DAEMON collect-gentxs --home "$EVMOS_HOME" 2>&1 || true)
     if contains "$OUTPUT" "Error"; then
         echo "collect-gentxs failed on $GENTX_FILE" | tee -a bad_gentxs.out
@@ -112,7 +116,7 @@ do
     fi
     gsed -i '/persistent_peers =/c\persistent_peers = ""' "$EVMOS_HOME"/config/config.toml # TODO: Should be sed, but gsed for local mac testing
 
-    echo "Run validate-genesis on created genesis file"
+    echo "Run validate-genesis on created genesis file" | boxes -d stone
     if ! $DAEMON validate-genesis --home "$EVMOS_HOME"; then 
         echo "validate-genesis failed on $GENTX_FILE" | tee -a bad_gentxs.out
         # remove gentxs and reset genesis
@@ -122,34 +126,22 @@ do
         continue
     fi
 
-    echo "Starting the node to get complete validation (module params, signatures, etc.)"
-    TMPFILE=$(mktemp)
+    echo "Starting the node to get complete validation (module params, signatures, etc.)" | boxes -d stone
     $DAEMON start --home "$EVMOS_HOME" > "$TMPFILE" 2>&1 &
 
-    # TODO: RUN COMMAND IN BACKGROUND BUT IF THERE'S A PANIC WE CAN SEND IT TO THE FILE
+    sleep 3 # TODO: change to 5s when pushing
 
-    sleep 5 # TODO: change to 5s when pushing
-
-    echo "Checking the status of the network"
+    echo "Checking the status of the network" | boxes -d stone
     OUTPUT=$($DAEMON status --node http://localhost:26657 2>&1 || true)
     if contains "$OUTPUT" "Error"; then
         PANIC=$(grep "panic" "$TMPFILE")
         echo "status check (faulty params or signatures, $PANIC) failed on $GENTX_FILE" | tee -a bad_gentxs.out
-    else 
-        echo $OUTPUT
-        echo "Killing the daemon"
-        killall evmosd >/dev/null 2>&1
     fi
 
-    echo "Remove gentx files to process next ones"
-    rm -rf "$EVMOS_HOME"/config/gentx/*.json
+    # echo $OUTPUT
+    echo "Killing the daemon" | boxes -d stone
+    killall evmosd > /dev/null 2>&1 || true
 
-    echo "Reset the genesis file and the chain"
-    rm -rf "$EVMOS_HOME"/config/genesis.json
-    cp "$EVMOS_HOME"/config/genesis.json.bak "$EVMOS_HOME"/config/genesis.json
-    $DAEMON unsafe-reset-all
-
+    echo "Cleaning the files" | boxes -d stone
+    rm -rf "$EVMOS_HOME" >/dev/null 2>&1
 done
-
-echo "Cleaning the files"
-rm -rf "$EVMOS_HOME" >/dev/null 2>&1
