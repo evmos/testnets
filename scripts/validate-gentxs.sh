@@ -59,6 +59,7 @@ done
 
 # Process all the GenTx files, one at a time, so that we can detect which ones are flawed
 GENTX_FILES=$(find "$GENTXS_DIR" -type f -regex "[^ ]*.json")
+# GENTX_FILES="/Users/akash/testnets/olympus_mons/gentx-300/ArtiDS_Node.json /Users/akash/testnets/olympus_mons/gentx-300/TEOLIDER.json"
 for GENTX_FILE in $GENTX_FILES
 do
     echo "Processing gentx file::"
@@ -80,7 +81,7 @@ do
 
     # limit the amount that can be bonded
     if [ $amountquery -gt $MAXBOND ]; then
-        echo "bonded too much: $amountquery > $MAXBOND on $GENTX_FILE" | tee -a bad_gentxs.out # TODO: double check this, not sure if correct
+        echo "bonded too much: $amountquery > $MAXBOND on $GENTX_FILE" | tee -a bad_gentxs.out
         continue
     fi
     # TODO could add checks for commission rate but will be caught by evmosd start
@@ -127,7 +128,7 @@ do
 
     # TODO: RUN COMMAND IN BACKGROUND BUT IF THERE'S A PANIC WE CAN SEND IT TO THE FILE
 
-    sleep 3 # TODO: change to 5s when pushing
+    sleep 5 # TODO: change to 5s when pushing
 
     echo "Checking the status of the network"
     OUTPUT=$($DAEMON status --node http://localhost:26657 2>&1 || true)
