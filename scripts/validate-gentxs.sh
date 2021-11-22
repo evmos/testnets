@@ -61,7 +61,6 @@ done
 GENTX_FILES=$(find "$GENTXS_DIR" -type f -regex "[^ ]*.json")
 for GENTX_FILE in $GENTX_FILES
 do
-    GENTX_FILE="/Users/akash/testnets/olympus_mons/gentx-300/TEOLIDER.json"
     echo "Processing gentx file::"
     echo "$GENTX_FILE"
     
