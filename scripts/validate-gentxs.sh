@@ -53,7 +53,6 @@ git checkout tags/$BINARY_VERSION > /dev/null 2>&1
 make build > /dev/null 2>&1
 chmod +x $DAEMON
 
-
 # echo "Making a genesis copy, as we are using it as a template for adding our gen txs"
 # cp "$EVMOS_HOME"/config/genesis.json "$EVMOS_HOME"/config/genesis.json.bak
 
