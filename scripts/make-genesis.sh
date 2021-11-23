@@ -2,14 +2,14 @@
 EVMOS_HOME="/tmp/evmosd$(date +%s)"
 CHAIN_ID="evmos_9000-2"
 DENOM="aphoton"
-MAXBOND="1000000000000" # 0.000001 PHOTON
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.2.0"
 GENTXS_DIR="$HOME/testnets/olympus_mons/valid-gentxs"
+GENACC_BALANCE="1000000000000000000" # 1 PHOTON
 FAUCET1="evmos1ht560g3pp729z86s2q6gy5ws6ugnut8r4uhyth"
 FAUCET2="evmos1hefvrgzc85hmn2nwdk3lhttk6jwlzzgv6e8tmc"
-FAUCET_BALANCE="250000000000000000000000" # 250,000 PHOTON
+FAUCET_BALANCE="2500000000000000000000000" # 2,500,000 PHOTON
 GENESIS_START_TIME="2021-11-20T17:00:00.000000Z" # in UTC
 GENESIS_OUTPUT="$HOME/testnets/olympus_mons/valid_genesis.json"
 
@@ -55,7 +55,7 @@ GENTX_FILES=$(find "$GENTXS_DIR" -type f -regex "[^ ]*.json")
 for GENTX_FILE in $GENTX_FILES
 do
     GENACC=$(jq -r '.body.messages[0].delegator_address' "$GENTX_FILE")
-    $DAEMON add-genesis-account "$GENACC" $MAXBOND$DENOM --home "$EVMOS_HOME"
+    $DAEMON add-genesis-account "$GENACC" $GENACC_BALANCE$DENOM --home "$EVMOS_HOME"
 done
 
 # Faucet accounts

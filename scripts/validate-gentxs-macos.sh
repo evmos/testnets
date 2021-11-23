@@ -4,6 +4,7 @@ RANDOM_KEY="randomevmosvalidatorkey"
 CHAIN_ID="evmos_9000-2"
 DENOM="aphoton"
 MAXBOND="1000000000000" # 0.000001 PHOTON
+GENACC_BALANCE="1000000000000000000" # 1 PHOTON
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.2.0"
@@ -102,7 +103,7 @@ do
     fi
     # TODO could add checks for commission rate but will be caught by evmosd start
     # check for duplicate accounts
-    OUTPUT=$($DAEMON add-genesis-account "$GENACC" 1000000000000000$DENOM --home "$EVMOS_HOME" 2>&1 || true)
+    OUTPUT=$($DAEMON add-genesis-account "$GENACC" $GENACC_BALANCE$DENOM --home "$EVMOS_HOME" 2>&1 || true)
     if contains "$OUTPUT" "Error"; then
         echo "add-genesis-account failed on $GENTX_FILE" | tee -a "$OUTFILE"
         # remove gentxs and reset genesis
@@ -110,10 +111,10 @@ do
         continue
     fi 
 
-    $DAEMON add-genesis-account $RANDOM_KEY 100000000000000$DENOM --home "$EVMOS_HOME" \
+    $DAEMON add-genesis-account $RANDOM_KEY $GENACC_BALANCE$DENOM --home "$EVMOS_HOME" \
         --keyring-backend test
 
-    $DAEMON gentx $RANDOM_KEY 90000000000000$DENOM --home "$EVMOS_HOME" \
+    $DAEMON gentx $RANDOM_KEY $MAXBOND$DENOM --home "$EVMOS_HOME" \
         --keyring-backend test --chain-id $CHAIN_ID
 
     cp "$GENTX_FILE" "$EVMOS_HOME"/config/gentx/
