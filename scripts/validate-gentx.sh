@@ -7,7 +7,7 @@ MAXBOND="1000000000000" # 0.000001 PHOTON
 GENACC_BALANCE="1000000000000000000" # 1 PHOTON
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
-BINARY_VERSION="v0.2.0"
+BINARY_VERSION="v0.3.0"
 GENTXS_DIR="$HOME/testnets/olympus_mons/gentxs"
 TMPFILE=$(mktemp)
 
