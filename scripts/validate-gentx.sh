@@ -7,7 +7,7 @@ MAXBOND="1000000000000" # 1 PHOTON
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.2.0"
-GENTXS_DIR="$HOME/testnets/olympus_mons/gentx-300"
+GENTXS_DIR="$HOME/testnets/olympus_mons/gentxs"
 TMPFILE=$(mktemp)
 
 # NOTE: This script is designed to run locally. We need to just adjust the one for CI. Not sure if the CI machine has `sponge`
@@ -69,6 +69,15 @@ for GENTX_FILE in $GENTX_FILES
 do
     create_genesis_template
     print "Processing gentx file::$GENTX_FILE"
+
+    if jq empty "$GENTX_FILE" >/dev/null 2>&1; then
+        echo "Parsed JSON successfully and got something other than false/null"
+    else
+        echo "Failed to parse JSON, or got false/null on $GENTX_FILE" | tee -a "$OUTFILE"
+        # remove gentxs and reset genesis
+        rm -rf "$EVMOS_HOME" >/dev/null 2>&1
+        continue
+    fi
     
     GENACC=$(jq -r '.body.messages[0].delegator_address' "$GENTX_FILE")
     denomquery=$(jq -r '.body.messages[0].value.denom' "$GENTX_FILE")
@@ -82,6 +91,8 @@ do
     # only allow $DENOM tokens to be bonded
     if [ "$denomquery" != $DENOM ]; then
         echo "incorrect denomination on $GENTX_FILE" | tee -a bad_gentxs.out
+        # remove gentxs and reset genesis
+        rm -rf "$EVMOS_HOME" >/dev/null 2>&1
         continue
     fi
 
