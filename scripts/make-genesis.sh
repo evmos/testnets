@@ -2,14 +2,15 @@
 EVMOS_HOME="/tmp/evmosd$(date +%s)"
 CHAIN_ID="evmos_9000-2"
 DENOM="aphoton"
-MAXBOND="1000000000000" # 1 PHOTON
+MAXBOND="1000000000000" # 0.000001 PHOTON
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.2.0"
 GENTXS_DIR="$HOME/testnets/olympus_mons/valid-gentxs"
 FAUCET1="evmos1ht560g3pp729z86s2q6gy5ws6ugnut8r4uhyth"
 FAUCET2="evmos1hefvrgzc85hmn2nwdk3lhttk6jwlzzgv6e8tmc"
-FAUCET_BALANCE="250000000000000000000000"
+FAUCET_BALANCE="250000000000000000000000" # 250,000 PHOTON
+GENESIS_START_TIME="2021-11-20T17:00:00.000000Z" # in UTC
 GENESIS_OUTPUT="$HOME/testnets/olympus_mons/valid_genesis.json"
 
 # NOTE: This file assumes you've ran through gentx validation. It is also meant
@@ -32,13 +33,21 @@ chmod +x $DAEMON
 print "Creating genesis file"
 $DAEMON init --chain-id $CHAIN_ID validator --home "$EVMOS_HOME" > /dev/null 2>&1
 
-# Update the various denoms in the genesis
-jq -r --arg DENOM "$DENOM" '(..|objects|select(has("denom"))).denom |= $DENOM |
-    .app_state.staking.params.bond_denom = $DENOM |
-    .app_state.mint.params.mint_denom = $DENOM' \
+# Update the various denoms, genesis time, and other params
+jq -r --arg denom "$DENOM" --arg genesis_start_time "$GENESIS_START_TIME" '
+    (..|objects|select(has("denom"))).denom |= $denom |
+    .app_state.staking.params.bond_denom = $denom |
+    .app_state.mint.params.mint_denom = $denom |
+    .genesis_time = $genesis_start_time |
+    .app_state.intrarelayer.params.token_pair_voting_period = "86400s" |
+    .app_state.staking.params.unbonding_time = "259200s" |
+    .app_state.staking.params.max_validators = ("300" | tonumber) |
+    .app_state.feemarket.params.no_base_fee = false |
+    .app_state.feemarket.params.enable_height = "0" |
+    .app_state.crisis.constant_fee.amount = "5000000000000000000" |
+    .consensus_params.block.time_iota_ms = "30000"' \
     "$EVMOS_HOME"/config/genesis.json | sponge "$EVMOS_HOME"/config/genesis.json
 
-gsed -i '/genesis_time/c\   \"genesis_time\" : \"2021-03-29T00:00:00Z\",' "$EVMOS_HOME"/config/genesis.json
 # TODO: Add renaming substitutions and jq merges
 
 print "Adding genesis accounts to genesis file"
