@@ -10,8 +10,8 @@ GENACC_BALANCE="1000000000000000000" # 1 PHOTON
 FAUCET1="evmos1ht560g3pp729z86s2q6gy5ws6ugnut8r4uhyth"
 FAUCET2="evmos1hefvrgzc85hmn2nwdk3lhttk6jwlzzgv6e8tmc"
 FAUCET_BALANCE="2500000000000000000000000" # 2,500,000 PHOTON
-GENESIS_START_TIME="2021-11-20T17:00:00.000000Z" # in UTC
-GENESIS_OUTPUT="$HOME/testnets/olympus_mons/valid_genesis.json"
+GENESIS_START_TIME="2021-11-25T19:00:00.000000Z" # in UTC
+GENESIS_OUTPUT="$HOME/testnets/olympus_mons/genesis.json"
 
 # NOTE: This file assumes you've ran through gentx validation. It is also meant
 # for local usage right now and tested on MacOS.
