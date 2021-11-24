@@ -74,7 +74,15 @@ These instructions are written targeting an Ubuntu 20.04 system.  Relevant chang
 5. Create the gentx
 
    ```bash
-   evmosd gentx <your key name> 1000000000000aphoton --commission-rate=0.1 --commission-max-rate=1 --commission-max-change-rate=0.1 --pubkey $(evmosd tendermint show-validator) --chain-id=evmos_9000-2
+   evmosd gentx <your key name> 1000000000000aphoton \
+     --chain-id=evmos_9000-2 \
+     --moniker=<moniker> \
+     --details="My moniker description" \
+     --commission-rate=0.05 \
+     --commission-max-rate=0.2 \
+     --commission-max-change-rate=0.01 \
+     --pubkey $(evmosd tendermint show-validator) \
+     --identity="<Keybase.io GPG Public Key>"
    ```
 
 6. Create Pull Request to this repository ([evmos/gentxs](./gentxs)) with the file `<your validator moniker>.json`.
