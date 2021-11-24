@@ -1,4 +1,4 @@
-# Evmos Incentivized Testnet
+# Submitting your GenTx for the Evmos Incentivized Testnet
 
 Thank you for becoming a genesis validator on Evmos! This guide will provide instructions on setting up a node, submitting a gentx, and other tasks needed to participate in the launch of the Evmos Olympus Mons incentivized testnet.
 
@@ -30,7 +30,7 @@ These instructions are written targeting an Ubuntu 20.04 system.  Relevant chang
 
    ```bash
    git clone https://github.com/tharsis/evmos
-   cd evmos && git checkout tags/v0.3.x -b <YOUR_BRANCH_NAME>
+   cd evmos && git checkout tags/v0.3.x
    make install
    ```
 
@@ -85,4 +85,4 @@ These instructions are written targeting an Ubuntu 20.04 system.  Relevant chang
      --identity="<Keybase.io GPG Public Key>"
    ```
 
-6. Create Pull Request to this repository ([evmos/gentxs](./gentxs)) with the file `<your validator moniker>.json`.
+6. Create Pull Request to the repository ([tharsis/testnets]()) with the file  `olympus_mons/gentxs/<your validator moniker>.json`. In order to be a valid submission, you need the .json file extension and no whitespace or special characters in your filename. Your PR should be one addition.
