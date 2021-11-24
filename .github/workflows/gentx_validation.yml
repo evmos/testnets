@@ -23,8 +23,9 @@ jobs:
         id: changes
         # Set outputs using the command.
         run: |
-          echo "::set-output name=json::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} -- "olympus_mons/gentxs" | grep .json$ | xargs)"
+          echo "::set-output name=changes::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} -- "olympus_mons/gentxs" | xargs)"
       - name: Check if added GenTx and if valid
+        if: ${{ steps.changes.outputs.changes }}
         run: |
           bash -x ./scripts/validate-gentx.sh
         env:
@@ -33,7 +34,6 @@ jobs:
           DENOM: aphoton
           GH_URL: https://github.com/tharsis/evmos
           BINARY_VERSION: v0.3.0
-          PRELAUNCH_GENESIS_URL: https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json
           PROJECT_DIR: ${{ github.workspace }}
           GENTX_DIR: olympus_mons/gentxs
-          GENTX_FILE: ${{ github.workspace }}/${{ steps.changes.outputs.json }}
+          GENTX_FILE: ${{ github.workspace }}/${{ steps.changes.outputs.changes }}
