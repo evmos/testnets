@@ -1,0 +1,11 @@
+{"body":{"messages":[{"@type":"/cosmos.staking.v1beta1.MsgCreateValidator","description":{"moniker":"evmos","identi
+ty":"","website":"","security_contact":"","details":""},"commission":{"rate":"0.100000000000000000","max_rate":"1.0
+00000000000000000","max_change_rate":"0.100000000000000000"},"min_self_delegation":"1","delegator_address":"evmos10
+vcy7ts0smxvqelhdgslhef8kxwyaac9ed8afe","validator_address":"evmosvaloper10vcy7ts0smxvqelhdgslhef8kxwyaac95rgdgy","p
+ubkey":{"@type":"/cosmos.crypto.ed25519.PubKey","key":"tagEt8HUa69No4lKIf+17aXhSQWjekCV3cYfesEY9wQ="},"value":{"den
+om":"aphoton","amount":"1000000000000"}}],"memo":"43af0b78f1140c1f441e571f687c2e89e681ca5e@10.132.0.3:26656","timeo
+ut_height":"0","extension_options":[],"non_critical_extension_options":[]},"auth_info":{"signer_infos":[{"public_ke
+y":{"@type":"/ethermint.crypto.v1.ethsecp256k1.PubKey","key":"AywSSG99FML9bTcyjk/+ujzEUhZg3LWh/0+YkmFa5WbU"},"mode_
+info":{"single":{"mode":"SIGN_MODE_DIRECT"}},"sequence":"0"}],"fee":{"amount":[],"gas_limit":"200000","payer":"","g
+ranter":""}},"signatures":["RnSxe/jd5xEnSrYhWO4XfK1HL5FwpVAhzlDWkmx/+kIxGCfHMfmcQxk46PnZ4K75TYGrU1dK8en+13KFWiEb9QA
+="]}
