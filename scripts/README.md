@@ -30,13 +30,14 @@ EVMOS_HOME="/tmp/evmosd$(date +%s)"
 RANDOM_KEY="randomevmosvalidatorkey"
 CHAIN_ID="evmos_9000-2"
 DENOM="aphoton"
-MAXBOND="1000000000000" # 1 PHOTON
+MAXBOND="1000000000000" # 0.000001 PHOTON
+GENACC_BALANCE="1000000000000000000" # 1 PHOTON
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.3.0"
 GENTXS_DIR="$HOME/testnets/olympus_mons/gentxs"
 TMPFILE=$(mktemp)
-OUTFILE="$HOME/testnets/bad_gentxs.txt"
+OUTFILE="$HOME/testnets/bad-gentxs.txt"
 ```
 
 Check the `$OUTFILE` to see which gentx files are broken.
