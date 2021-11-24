@@ -28,4 +28,4 @@ jobs:
           BINARY_VERSION: v0.3.0
           PRELAUNCH_GENESIS_URL: https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json
           PROJECT_DIR: ${{ github.workspace }}
-          GENTXS_DIR: $PROJECT_DIR/olympus_mons/gentxs
+          GENTX_DIR: olympus_mons/gentxs
