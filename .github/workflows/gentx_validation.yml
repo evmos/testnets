@@ -6,7 +6,10 @@ on:
   pull_request:
     branches:
       - main
-   workflow_dispatch
+   workflow_dispatch:
+    description: 'Manually run GenTx Validation'
+    required: true
+    default: 'Re-run on #${{ github.ref }}'
 
 jobs:
   verify-gentx:
