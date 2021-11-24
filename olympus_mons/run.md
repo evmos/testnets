@@ -63,7 +63,7 @@ go: go version go1.17 darwin/amd64
 ```
 If the software version does not match, then please check your `$PATH` to ensure the correct `evmosd` is running.
 
-### Save your Chain ID in evmosd config TODO
+### Save your Chain ID in evmosd config
 
 If you haven't done so already, please save the mainnet chain-id to your client.toml. This will make it so you do not have to manually pass in the chain-id flag for every CLI command.
 
