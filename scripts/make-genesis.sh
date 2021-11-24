@@ -5,13 +5,13 @@ DENOM="aphoton"
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.3.0"
-GENTXS_DIR="$HOME/testnets/olympus_mons/valid-gentxs"
+GENTXS_DIR="$HOME/testnets/olympus_mons/final-gentxs"
 GENACC_BALANCE="1000000000000000000" # 1 PHOTON
 FAUCET1="evmos1ht560g3pp729z86s2q6gy5ws6ugnut8r4uhyth"
 FAUCET2="evmos1hefvrgzc85hmn2nwdk3lhttk6jwlzzgv6e8tmc"
 FAUCET_BALANCE="2500000000000000000000000" # 2,500,000 PHOTON
-GENESIS_START_TIME="2021-11-20T17:00:00.000000Z" # in UTC
-GENESIS_OUTPUT="$HOME/testnets/olympus_mons/valid_genesis.json"
+GENESIS_START_TIME="2021-11-25T19:00:00.000000Z" # in UTC
+GENESIS_OUTPUT="$HOME/testnets/olympus_mons/genesis.json"
 
 # NOTE: This file assumes you've ran through gentx validation. It is also meant
 # for local usage right now and tested on MacOS.
@@ -44,19 +44,22 @@ jq -r --arg denom "$DENOM" --arg genesis_start_time "$GENESIS_START_TIME" '
     .app_state.staking.params.max_validators = ("300" | tonumber) |
     .app_state.feemarket.params.no_base_fee = false |
     .app_state.feemarket.params.enable_height = "0" |
-    .app_state.crisis.constant_fee.amount = "5000000000000000000" |
-    .consensus_params.block.time_iota_ms = "30000"' \
+    .app_state.crisis.constant_fee.amount = "5000000000000000000"' \
     "$EVMOS_HOME"/config/genesis.json | sponge "$EVMOS_HOME"/config/genesis.json
 
 # TODO: Add renaming substitutions and jq merges
 
 print "Adding genesis accounts to genesis file"
 GENTX_FILES=$(find "$GENTXS_DIR" -type f -regex "[^ ]*.json")
+COUNT=0
 for GENTX_FILE in $GENTX_FILES
 do
     GENACC=$(jq -r '.body.messages[0].delegator_address' "$GENTX_FILE")
     $DAEMON add-genesis-account "$GENACC" $GENACC_BALANCE$DENOM --home "$EVMOS_HOME"
+    COUNT=$((COUNT + 1))
 done
+
+print "Added $COUNT genesis accounts to genesis file"
 
 # Faucet accounts
 $DAEMON add-genesis-account "$FAUCET1" $FAUCET_BALANCE$DENOM --home "$EVMOS_HOME"
