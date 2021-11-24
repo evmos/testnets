@@ -44,8 +44,7 @@ jq -r --arg denom "$DENOM" --arg genesis_start_time "$GENESIS_START_TIME" '
     .app_state.staking.params.max_validators = ("300" | tonumber) |
     .app_state.feemarket.params.no_base_fee = false |
     .app_state.feemarket.params.enable_height = "0" |
-    .app_state.crisis.constant_fee.amount = "5000000000000000000" |
-    .consensus_params.block.time_iota_ms = "30000"' \
+    .app_state.crisis.constant_fee.amount = "5000000000000000000"' \
     "$EVMOS_HOME"/config/genesis.json | sponge "$EVMOS_HOME"/config/genesis.json
 
 # TODO: Add renaming substitutions and jq merges
