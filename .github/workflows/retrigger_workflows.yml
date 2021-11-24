@@ -1,0 +1,15 @@
+name: "Re-trigger Workflows on open PRs"
+
+on:
+  push:
+    branches:
+      - main
+  
+jobs:
+  retrigger-workflows-on-open-prs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: vanstinator/re-run-open-prs-on-base-update@v1.2.0
+        with:
+          github_token: ${{ secrets.GENTX }}
