@@ -16,7 +16,7 @@ jobs:
           go-version: '^1.17'
       - run: go version
       - name: Install dependencies
-      - sudo apt install -y boxes moreutils coreutils
+        run: sudo apt install -y boxes moreutils coreutils
       - name: gentx-validation
         run: |
           bash -x ./scripts/validate-gentxs.sh
