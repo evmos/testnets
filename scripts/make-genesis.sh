@@ -5,7 +5,7 @@ DENOM="aphoton"
 DAEMON="./build/evmosd"
 GH_URL="https://github.com/tharsis/evmos"
 BINARY_VERSION="v0.3.0"
-GENTXS_DIR="$HOME/testnets/olympus_mons/valid-gentxs"
+GENTXS_DIR="$HOME/testnets/olympus_mons/final-gentxs"
 GENACC_BALANCE="1000000000000000000" # 1 PHOTON
 FAUCET1="evmos1ht560g3pp729z86s2q6gy5ws6ugnut8r4uhyth"
 FAUCET2="evmos1hefvrgzc85hmn2nwdk3lhttk6jwlzzgv6e8tmc"
@@ -51,11 +51,15 @@ jq -r --arg denom "$DENOM" --arg genesis_start_time "$GENESIS_START_TIME" '
 
 print "Adding genesis accounts to genesis file"
 GENTX_FILES=$(find "$GENTXS_DIR" -type f -regex "[^ ]*.json")
+COUNT=0
 for GENTX_FILE in $GENTX_FILES
 do
     GENACC=$(jq -r '.body.messages[0].delegator_address' "$GENTX_FILE")
     $DAEMON add-genesis-account "$GENACC" $GENACC_BALANCE$DENOM --home "$EVMOS_HOME"
+    COUNT=$((COUNT + 1))
 done
+
+print "Added $COUNT genesis accounts to genesis file"
 
 # Faucet accounts
 $DAEMON add-genesis-account "$FAUCET1" $FAUCET_BALANCE$DENOM --home "$EVMOS_HOME"
