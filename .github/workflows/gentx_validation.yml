@@ -19,6 +19,11 @@ jobs:
       - run: go version
       - name: Install dependencies
         run: sudo apt install -y boxes moreutils coreutils
+      - name: Get changed files
+        id: changes
+        # Set outputs using the command.
+        run: |
+          echo "::set-output name=json::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} -- "olympus_mons/gentxs" | grep .json$ | xargs)"
       - name: Check if added GenTx and if valid
         run: |
           bash -x ./scripts/validate-gentx.sh
@@ -31,3 +36,4 @@ jobs:
           PRELAUNCH_GENESIS_URL: https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json
           PROJECT_DIR: ${{ github.workspace }}
           GENTX_DIR: olympus_mons/gentxs
+          GENTX_FILE: $ {{ steps.changes.outputs.json }}

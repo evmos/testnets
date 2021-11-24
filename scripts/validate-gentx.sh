@@ -21,7 +21,7 @@ make build > /dev/null 2>&1
 chmod +x "$DAEMON"
 
 # Get the diff between main and commit
-GENTX_FILE=$(git -C "$PROJECT_DIR" diff --name-only main HEAD -- "$GENTX_DIR")
+echo "$GENTX_FILE"
 LEN_GENTX=${#GENTX_FILE}
 
 if [ $LEN_GENTX -eq 0 ]; then
