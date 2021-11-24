@@ -1,4 +1,4 @@
-# Evmos Incentivized Testnet 
+# Evmos Incentivized Testnet
 
 Thank you for becoming a genesis validator on Evmos! This guide will provide instructions on setting up a node, submitting a gentx, and other tasks needed to participate in the launch of the Evmos Olympus Mons incentivized testnet.
 
@@ -13,7 +13,7 @@ A `gentx` does three things:
 Software:
 
 - Go version: [v1.17+](https://golang.org/dl/)
-- Evmos version: [v0.2.x](https://github.com/tharsis/evmos/releases)
+- Evmos version: [v0.3.x](https://github.com/tharsis/evmos/releases)
 
 To verify that Go is installed:
 
@@ -22,7 +22,7 @@ go version
 # Should return go version go1.17 linux/amd64
 ```
 
-## Instructions (Until November 19, 2021 12:00 PST)
+## Instructions (Until November 19, 2021 12AM PST)
 
 These instructions are written targeting an Ubuntu 20.04 system.  Relevant changes to commands should be made depending on the OS/architecture you are running on.
 
@@ -30,11 +30,11 @@ These instructions are written targeting an Ubuntu 20.04 system.  Relevant chang
 
    ```bash
    git clone https://github.com/tharsis/evmos
-   cd evmos && git checkout tags/v0.2.x -b <YOUR_BRANCH_NAME>
+   cd evmos && git checkout tags/v0.3.x -b <YOUR_BRANCH_NAME>
    make install
    ```
 
-   Make sure to checkout to some `v0.2.x` tag.
+   Make sure to checkout to some `v0.3.x` tag.
 
    Verify that everything is OK. If you get something *like* the following, you've successfully installed Evmos on your system.
 
@@ -43,7 +43,7 @@ These instructions are written targeting an Ubuntu 20.04 system.  Relevant chang
 
    name: evmos
    server_name: evmosd
-   version: '"0.1.3"'
+   version: '"0.3.0"'
    commit: 7ad7715c59ec38fd19c06de54d03a982afebf961
    build_tags: netgo,ledger
    go: go version go1.17 darwin/amd64
