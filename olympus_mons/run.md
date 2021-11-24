@@ -23,7 +23,7 @@ or issues during the launch process.
 
 ## Instructions
 
-This guide assumes that you have completed the tasks involved in [Submitting your GenTx for the Evmos Incentivized Testnet](https://github.com/tharsis/testnets/blob/main/olympus_mons/gentx.md).  You should
+This guide assumes that you have completed the tasks involved in [Submitting your GenTx for the Evmos Incentivized Testnet](./gentx.md).  You should
 be running on a machine that meets the [hardware requirements specified in the Evmos Docs](https://evmos.dev/guides/validators/setup.html#minimum-requirements)
 with Go installed.  We are assuming you already have a daemon home ($HOME/.evmosd)
 setup.
@@ -125,6 +125,11 @@ You can now download the "genesis" file for the chain.  It is pre-filled with th
 
 ```sh
 curl https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json > ~/.evmosd/config/genesis.json
+```
+
+We recommend using `sha256sum` to check the hash of the genesis.
+```sh
+sha256sum 2b5164f4bab00263cb424c3d0aa5c47a707184c6ff288322acc4c7e0c5f6f36f ~/.evmosd/config/genesis.json
 ```
 
 ### Reset Chain Database

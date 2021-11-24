@@ -14,13 +14,13 @@ Follow the instructions on the official documentation to [join the testnet](http
 
 ## Genesis File
 
-Download your [genesis.json](./genesis.json)
+Download the minified genesis file [genesis.json](./genesis.json)
 
 Verify the SHA256 checksum using:
 
 ```bash
-sha256sum  genesis.json
-# 5ecb4452284df2c88e45b260447b6ab35881e75866a7e29556be7b7dc0ab1a80  genesis.json
+sha256sum genesis.json
+# 2b5164f4bab00263cb424c3d0aa5c47a707184c6ff288322acc4c7e0c5f6f36f  genesis.json
 ```
 
 ## Details
