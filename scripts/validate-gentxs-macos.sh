@@ -58,7 +58,7 @@ chmod +x $DAEMON
 print "Mark files with spaces, they are not allowed"
 find "$GENTXS_DIR" -type f -name "* *" | while read -r GENTX_FILE
 do
-    echo "whitespace on $GENTX_FILE; won't process" | tee -a "$OUTFILE"
+    echo "$GENTX_FILE" | tee -a "$OUTFILE"
 done
 
 # Process all the GenTx files, one at a time, so that we can detect which ones are flawed
@@ -71,7 +71,7 @@ do
     if jq empty "$GENTX_FILE" >/dev/null 2>&1; then
         echo "Parsed JSON successfully and got something other than false/null"
     else
-        echo "Failed to parse JSON, or got false/null on $GENTX_FILE" | tee -a "$OUTFILE"
+        echo "$GENTX_FILE" | tee -a "$OUTFILE"
         # remove gentxs and reset genesis
         rm -rf "$EVMOS_HOME" >/dev/null 2>&1
         continue
@@ -88,7 +88,7 @@ do
 
     # only allow $DENOM tokens to be bonded
     if [ "$denomquery" != $DENOM ]; then
-        echo "incorrect denomination on $GENTX_FILE" | tee -a "$OUTFILE"
+        echo "$GENTX_FILE" | tee -a "$OUTFILE"
         # remove gentxs and reset genesis
         rm -rf "$EVMOS_HOME" >/dev/null 2>&1
         continue
@@ -96,7 +96,7 @@ do
 
     # limit the amount that can be bonded
     if [ $amountquery -gt $MAXBOND ]; then
-        echo "bonded too much: $amountquery > $MAXBOND on $GENTX_FILE" | tee -a "$OUTFILE"
+        echo "$GENTX_FILE" | tee -a "$OUTFILE"
         # remove gentxs and reset genesis
         rm -rf "$EVMOS_HOME" >/dev/null 2>&1
         continue
@@ -105,7 +105,7 @@ do
     # check for duplicate accounts
     OUTPUT=$($DAEMON add-genesis-account "$GENACC" $GENACC_BALANCE$DENOM --home "$EVMOS_HOME" 2>&1 || true)
     if contains "$OUTPUT" "Error"; then
-        echo "add-genesis-account failed on $GENTX_FILE" | tee -a "$OUTFILE"
+        echo "$GENTX_FILE" | tee -a "$OUTFILE"
         # remove gentxs and reset genesis
         rm -rf "$EVMOS_HOME" >/dev/null 2>&1
         continue
@@ -122,7 +122,7 @@ do
     print "Collecting gentxs"
     OUTPUT=$($DAEMON collect-gentxs --home "$EVMOS_HOME" 2>&1 || true)
     if contains "$OUTPUT" "Error"; then
-        echo "collect-gentxs failed on $GENTX_FILE" | tee -a "$OUTFILE"
+        echo "$GENTX_FILE" | tee -a "$OUTFILE"
         # remove gentxs and reset genesis
         rm -rf "$EVMOS_HOME" >/dev/null 2>&1
         continue
@@ -131,7 +131,7 @@ do
 
     print "Run validate-genesis on created genesis file"
     if ! $DAEMON validate-genesis --home "$EVMOS_HOME"; then 
-        echo "validate-genesis failed on $GENTX_FILE" | tee -a "$OUTFILE"
+        echo "$GENTX_FILE" | tee -a "$OUTFILE"
         # remove gentxs and reset genesis
         rm -rf "$EVMOS_HOME" >/dev/null 2>&1
         continue
@@ -146,7 +146,7 @@ do
     OUTPUT=$($DAEMON status --node http://localhost:26657 2>&1 || true)
     if contains "$OUTPUT" "Error"; then
         PANIC=$(grep "panic" "$TMPFILE")
-        echo "status check (faulty params or signatures, $PANIC) failed on $GENTX_FILE" | tee -a "$OUTFILE"
+        echo "$GENTX_FILE" | tee -a "$OUTFILE"
     fi
 
     # echo $OUTPUT
