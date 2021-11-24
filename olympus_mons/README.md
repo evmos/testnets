@@ -4,6 +4,12 @@
 
 ## Instructions
 
+**Genesis Validators**
+
+Follow the instructions on the ["Running as a genesis validator"](https://github.com/tharsis/testnets/blob/main/olympus_mons/run.md) guide.
+
+**Full nodes and general particpants**
+
 Follow the instructions on the official documentation to [join the testnet](https://evmos.dev/testnet/join.html) and how to obtain tokens using the [faucet](https://evmos.dev/testnet/faucet.html).
 
 ## Genesis File
@@ -36,4 +42,4 @@ Submissions close on November 18, 2021 17:00 PST.
 
 ### Genesis Launch
 
-November 20, 2021 18:00 UTC.
+November 25, 2021 19:00 UTC.
