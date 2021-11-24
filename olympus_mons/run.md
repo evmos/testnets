@@ -23,7 +23,7 @@ or issues during the launch process.
 
 ## Instructions
 
-This guide assumes that you have completed the tasks involved in [Submitting your GenTx for the Evmos Incentivized Testnet](https://github.com/tharsis/testnets/blob/main/olympus_mons/gentx.md).  You should
+This guide assumes that you have completed the tasks involved in [Submitting your GenTx for the Evmos Incentivized Testnet](./gentx.md).  You should
 be running on a machine that meets the [hardware requirements specified in the Evmos Docs](https://evmos.dev/guides/validators/setup.html#minimum-requirements)
 with Go installed.  We are assuming you already have a daemon home ($HOME/.evmosd)
 setup.
