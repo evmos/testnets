@@ -3,38 +3,11 @@ EVMOS_HOME="/tmp/evmosd$(date +%s)"
 RANDOM_KEY="randomevmosvalidatorkey"
 MAXBOND="1000000000000" # 0.000001 PHOTON
 GENACC_BALANCE="1000000000000000000" # 1 PHOTON
-TMPFILE=$(mktemp)
 
 # NOTE: This script is designed to run in CI.
 
-# contains(string, substring)
-#
-# Returns 0 if the specified string contains the specified substring,
-# otherwise returns 1. POSIX Compliant.
-contains() {
-    string="$1"
-    substring="$2"
-    if test "${string#*$substring}" != "$string"
-    then
-        return 0    # $substring is in $string
-    else
-        return 1    # $substring is not in $string
-    fi
-}
-
 print() {
     echo "$1" | boxes -d stone
-}
-
-create_genesis_template() {
-    # Adding random validator key so that we can start the network ourselves
-    $DAEMON keys add $RANDOM_KEY --keyring-backend test --home "$EVMOS_HOME" > /dev/null 2>&1
-    $DAEMON init --chain-id $CHAIN_ID validator --home "$EVMOS_HOME" > /dev/null 2>&1
-    
-    # Setting the genesis time earlier so that we can start the network in our test
-    sed -i '/genesis_time/c\   \"genesis_time\" : \"2021-03-29T00:00:00Z\",' "$EVMOS_HOME"/config/genesis.json
-    # Update the various denoms in the genesis
-    jq -r --arg DENOM "$DENOM" '(..|objects|select(has("denom"))).denom |= $DENOM | .app_state.staking.params.bond_denom = $DENOM | .app_state.mint.params.mint_denom = $DENOM' "$EVMOS_HOME"/config/genesis.json | sponge "$EVMOS_HOME"/config/genesis.json
 }
 
 set -e
@@ -54,7 +27,6 @@ LEN_GENTX=${#GENTX_FILE}
 if [ $LEN_GENTX -eq 0 ]; then
     print "No new gentx file found."
 else
-    # TODO: Check if the wrong directory
     # TODO: Check if white space in name
     GENACC=$(jq -r '.body.messages[0].delegator_address' "$GENTX_FILE")
     denomquery=$(jq -r '.body.messages[0].value.denom' "$GENTX_FILE")
