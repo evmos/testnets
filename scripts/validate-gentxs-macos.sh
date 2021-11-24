@@ -156,3 +156,5 @@ do
     print "Cleaning the files"
     rm -rf "$EVMOS_HOME" >/dev/null 2>&1
 done
+
+print "Done."
