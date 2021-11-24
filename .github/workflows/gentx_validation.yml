@@ -36,4 +36,4 @@ jobs:
           PRELAUNCH_GENESIS_URL: https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json
           PROJECT_DIR: ${{ github.workspace }}
           GENTX_DIR: olympus_mons/gentxs
-          GENTX_FILE: $ {{ steps.changes.outputs.json }}
+          GENTX_FILE: ${{ steps.changes.outputs.json }}
