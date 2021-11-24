@@ -17,9 +17,9 @@ jobs:
       - run: go version
       - name: Install dependencies
         run: sudo apt install -y boxes moreutils coreutils
-      - name: gentx-validation
+      - name: Check if added GenTx and if valid
         run: |
-          bash -x ./scripts/validate-gentxs.sh
+          bash -x ./scripts/validate-gentx.sh
         env:
           DAEMON: ./build/evmosd
           CHAIN_ID: evmos_9000-2
