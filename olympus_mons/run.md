@@ -212,7 +212,7 @@ Allow inbound peers to connect
 sudo ufw allow from any to any port 26656 proto tcp
 ```
 
-_In production you would configure these firewall settings on your sentries only_
+_In production you would configure these firewall settings on your sentries only. See the [validator security section](https://evmos.dev/guides/validators/security.html) in the Evmos docs for information on making a secure validator set up with sentries._
 
 ## Conclusion
 
