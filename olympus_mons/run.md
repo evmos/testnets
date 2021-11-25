@@ -2,24 +2,24 @@
 
 ## GenTx submissions are done and closed!
 
-To see if you were included in the final genesis, you can search `genesis.json` or the `final-gentxs` folder for your `moniker`, `delegation_address` or other identifiers unique to you.
+To see if you were included in the final genesis, search the `genesis.json` file or the `final-gentxs` folder for your `moniker`, `delegator_address` or other identifiers unique to you.
 
 If you were included, congrats! there were a lot of submissions to process and we're glad to have you.
 
 If you weren't, thank you for taking the time to submit - we suggest looking at the [Mars Meteor Missions](https://evmos.blog/evmos-incentivized-testnet-event-the-mars-meteor-missions-bbbb7ffa1b7c) for participating in the Olympus Mons incentivzed testnet as the rewards can end up much higher for the other missions!
 
 We encourage you to find ways to jail validators if you're really interested in becoming part of the 300 once the network launches, subject to our [Code of Conduct](https://www.notion.so/tharsis/Code-of-Conduct-for-Evmos-Incentivized-Testnet-802fc5298ef647ca954c5dc0d44d39c1).
+
 ## For selected validators
 **The Chain Genesis Time is 19:00 UTC on Nov 25, 2021.**
 
 Please have your validator up and ready by this time, and be available for further instructions if necessary
 at that time.
 
-The primary point of communication for the genesis process will be the #validators
+The primary point of communication for the genesis process will be the #validator-chat
 channel on the [Evmos Discord](https://discord.gg/PJeeUYRHuY). It is absolutely critical that you
 and your team join the Discord during launch, as it will be the coordination point in case of any hiccups
 or issues during the launch process.
-
 
 ## Instructions
 
@@ -56,8 +56,8 @@ evmosd version --long
 
 name: evmos
 server_name: evmosd
-version: '"0.3.0"'
-commit: 7ad7715c59ec38fd19c06de54d03a982afebf961
+version: 0.3.0
+commit: 070b668f2cbbf52548c46e96b236e09884483dd4
 build_tags: netgo,ledger
 go: go version go1.17 darwin/amd64
 ```
