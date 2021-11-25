@@ -198,8 +198,9 @@ Disable firewall
 
 Set defaults for incoming/outgoing ports
 
-`ufw default deny incoming`  
-`ufw default allow outgoing`
+```sh
+ufw default deny incoming
+ufw default allow outgoing
 
 Re-enable the firewall
 
