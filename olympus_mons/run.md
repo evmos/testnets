@@ -116,7 +116,7 @@ source ~/.profile
 
 Finally, you should move the evmosd binary into the cosmovisor/genesis folder.
 ```
-mv $GOPATH/bin/evmosd ~/.evmosd/cosmovisor/genesis/bin
+cp $GOPATH/bin/evmosd ~/.evmosd/cosmovisor/genesis/bin
 ```
 
 ### Download Genesis File
