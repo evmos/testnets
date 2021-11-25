@@ -188,7 +188,7 @@ You can check the status with:
 systemctl status evmosd
 ```
 
-### Configue Your Firewall
+### Configure Your Firewall (Recommended)
 
 This will contribute to the overall health of the network and is strongly recommended
 
