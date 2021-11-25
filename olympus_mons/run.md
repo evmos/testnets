@@ -129,7 +129,8 @@ curl https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesi
 
 We recommend using `sha256sum` to check the hash of the genesis.
 ```sh
-sha256sum 2b5164f4bab00263cb424c3d0aa5c47a707184c6ff288322acc4c7e0c5f6f36f ~/.evmosd/config/genesis.json
+cd ~/.evmosd/config
+echo "2b5164f4bab00263cb424c3d0aa5c47a707184c6ff288322acc4c7e0c5f6f36f  genesis.json" | sha256sum -c
 ```
 
 ### Reset Chain Database
