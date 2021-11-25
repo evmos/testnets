@@ -188,6 +188,32 @@ You can check the status with:
 systemctl status evmosd
 ```
 
+### Configue Your Firewall
+
+This will contribute to the overall health of the network and is strongly recommended
+
+Disable firewall
+
+`ufw disable`
+
+Set defaults for incoming/outgoing ports
+
+`ufw default deny incoming`  
+`ufw default allow outgoing`
+
+Re-enable the firewall
+
+`ufw enable`  
+`ufw status verbose`
+
+Allow inbound peers to connect
+
+```
+sudo ufw allow from any to any port 26656 proto tcp
+```
+
+_In production you would configure these firewall settings on your sentries only_
+
 ## Conclusion
 
 See you all at launch!  Join the discord!
