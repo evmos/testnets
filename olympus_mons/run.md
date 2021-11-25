@@ -190,7 +190,7 @@ systemctl status evmosd
 
 ### Configure Your Firewall (Recommended)
 
-This will contribute to the overall health of the network and is strongly recommended
+This will contribute to the overall health of the network and better secure your node instance.
 
 Disable firewall
 
