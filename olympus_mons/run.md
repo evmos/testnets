@@ -162,11 +162,12 @@ evmosd tendermint show-node-id
 If you are relying on just seed node and no persistent peers or a low amount of them, please increase the following params in `config.toml`:
 ```toml
 # Maximum number of inbound peers
-max_num_inbound_peers = 70
+max_num_inbound_peers = 200
 
 # Maximum number of outbound peers to connect to, excluding persistent peers
-max_num_outbound_peers = 40
+max_num_outbound_peers = 100
 ```
+
 
 ### Start your node
 
