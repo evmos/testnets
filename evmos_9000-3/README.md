@@ -12,7 +12,8 @@ Download the zipped genesis file [genesis.zip](./genesis.zip)
 
 Extract it with command
 
-```unzip genesis.zip
+```bash
+unzip genesis.zip
 ```
 
 Verify the SHA256 checksum using:
