@@ -29,7 +29,7 @@ sha256sum genesis.json
 - EIP155 Chain ID: `9000`
 - `evmosd` version: [`v1.0.0-beta1`](https://github.com/tharsis/evmos/releases)
 - Faucet: [faucet.evmos.dev](https://faucet.evmos.dev)
-- EVM explorer: [blockscout.evmos.dev](https://blockscout.evmos.dev)
+- EVM explorer: [evm.evmos.dev](https://evm.evmos.dev)
 - Cosmos explorer: [explorer.evmos.dev](https://explorer.evmos.dev)
 
 ## Seeds & Peers
