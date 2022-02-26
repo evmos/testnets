@@ -1,1 +1,4 @@
-3a6b22e1569d9f85e9e97d1d204a1c457d860926@35.233.98.138:26656
+c00ec5f0c8d664e5eccdb312a7394f16b325e725@bd-evmos-testnet-sentry-01.bdnodes.net:26656
+68c0966f3f6ee42369710d57de2e015ec87b36ca@bd-evmos-testnet-sentry-02.bdnodes.net:26656
+8d1a0934d38f09e587cca498c9f552abf3258806@bd-evmos-testnet-sentry-03.bdnodes.net:26656
+3a6b22e1569d9f85e9e97d1d204a1c457d860926@bd-evmos-testnet-seed-node-01.bdnodes.net:26656
