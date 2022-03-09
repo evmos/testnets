@@ -30,7 +30,7 @@ sha256sum genesis.json
 - `evmosd` version: [`v1.0.0-beta1`](https://github.com/tharsis/evmos/releases)
 - Faucet: [faucet.evmos.dev](https://faucet.evmos.dev)
 - EVM explorer: [evm.evmos.dev](https://evm.evmos.dev)
-- Cosmos explorer: [explorer.evmos.dev](https://explorer.evmos.dev)
+- Cosmos explorer: [explorer.evmos.dev](https://testnet.mintscan.io/evmos-testnet)
 
 ## Seeds & Peers
 
