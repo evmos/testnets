@@ -1,1 +1,2 @@
 3a6b22e1569d9f85e9e97d1d204a1c457d860926@bd-evmos-testnet-seed-node-01.bdnodes.net:26656
+e8efea0d6bebe8d55240707aef3cccd6394e0f86@161.97.74.88:26651
