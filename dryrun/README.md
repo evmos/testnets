@@ -24,7 +24,9 @@ sha256sum genesis.json
 # 87e0e45b4f5278556af7cf31e6d856aa418dc883ffc7c80066a78b356c309dc6  genesis.json
 ```
 
-## Instructions
+## Step-by-Step
+
+These are abbreviated version of the instructions linked above.
 
 1. Move the genesis file into your config
 
