@@ -32,7 +32,7 @@ sha256sum genesis.json
 cp -f genesis.json $HOME/.evmosd/config
 ```
 
-2. BACK UP ALL PRIVATE KEYS, YOU WILL NEED THESE FOR MAINNET
+2. **BACK UP ALL PRIVATE KEYS, YOU WILL NEED THESE FOR MAINNET**
 
 3. Remove any previous state
 
