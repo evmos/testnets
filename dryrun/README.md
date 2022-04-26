@@ -24,6 +24,29 @@ sha256sum genesis.json
 # 87e0e45b4f5278556af7cf31e6d856aa418dc883ffc7c80066a78b356c309dc6  genesis.json
 ```
 
+## Instructions
+
+1. Move the genesis file into your config
+
+```
+cp -f genesis.json $HOME/.evmosd/config
+```
+
+2. BACK UP ALL PRIVATE KEYS, YOU WILL NEED THESE FOR MAINNET
+
+3. Remove any previous state
+
+```
+rm $HOME/.evmosd/config/addrbook.json
+evmosd tendermint unsafe-reset-all --home=$HOME/.evmosd
+```
+
+4. Start the chain
+
+```
+evmosd start
+```
+
 ## Details
 
 - Network Chain ID: `evmosdryrun_9009-1`
