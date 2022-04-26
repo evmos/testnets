@@ -1,4 +1,4 @@
-# Evmos Testnet
+# Evmos Mainnet Dry Run
 
 ## Instructions
 
