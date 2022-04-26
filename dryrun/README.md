@@ -58,6 +58,7 @@ evmosd start
 ## Schedule
 
 Genesis: `2022-04-26T19:00:00Z`
+
 Airdrop: `2022-04-26T22:00:00Z`
 
 ## Seeds & Peers
