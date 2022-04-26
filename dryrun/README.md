@@ -4,7 +4,7 @@
 
 ## Full nodes and general participants
 
-Follow the instructions on the official documentation to [carry out a manual upgrade](https://docs.evmos.org/validators/upgrades/manual.html) with a (data reset)[https://docs.evmos.org/validators/upgrades/manual.html#_3-data-reset].
+Follow the instructions on the official documentation to [carry out a manual upgrade](https://docs.evmos.org/validators/upgrades/manual.html) with a [data reset](https://docs.evmos.org/validators/upgrades/manual.html#_3-data-reset).
 
 ## Genesis File
 
