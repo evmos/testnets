@@ -2,9 +2,34 @@
 
 ## Instructions
 
-## Full nodes and general participants
+### Full nodes and general participants
 
 Follow the instructions on the official documentation to [carry out a manual upgrade](https://docs.evmos.org/validators/upgrades/manual.html) with a [data reset](https://docs.evmos.org/validators/upgrades/manual.html#_3-data-reset).
+
+### Step-by-Step
+
+These are abbreviated version of the instructions linked above.
+
+1. Move the genesis file into your config
+
+```
+cp -f genesis.json $HOME/.evmosd/config
+```
+
+2. **BACK UP ALL PRIVATE KEYS**
+
+3. Remove any previous state
+
+```
+rm $HOME/.evmosd/config/addrbook.json
+evmosd tendermint unsafe-reset-all --home=$HOME/.evmosd
+```
+
+4. Start the chain
+
+```
+evmosd start
+```
 
 ## Genesis File
 
@@ -22,31 +47,6 @@ Verify the SHA256 checksum using:
 ```bash
 sha256sum genesis.json
 # 87e0e45b4f5278556af7cf31e6d856aa418dc883ffc7c80066a78b356c309dc6  genesis.json
-```
-
-## Step-by-Step
-
-These are abbreviated version of the instructions linked above.
-
-1. Move the genesis file into your config
-
-```
-cp -f genesis.json $HOME/.evmosd/config
-```
-
-2. **BACK UP ALL PRIVATE KEYS, YOU WILL NEED THESE FOR MAINNET**
-
-3. Remove any previous state
-
-```
-rm $HOME/.evmosd/config/addrbook.json
-evmosd tendermint unsafe-reset-all --home=$HOME/.evmosd
-```
-
-4. Start the chain
-
-```
-evmosd start
 ```
 
 ## Details
