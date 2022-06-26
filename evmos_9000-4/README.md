@@ -4,7 +4,7 @@
 
 ## Full nodes and general participants
 
-Follow the instructions on the official documentation to [join the testnet](https://evmos.dev/testnet/join.html) and how to obtain tokens using the [faucet](https://evmos.dev/testnet/faucet.html).
+Follow the instructions on the official documentation to [join the testnet](https://evmos.dev/validators/testnet.html) and how to obtain tokens using the [faucet](https://evmos.dev/developers/faucet.html).
 
 ## Genesis File
 
