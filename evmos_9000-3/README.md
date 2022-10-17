@@ -8,7 +8,7 @@ Follow the instructions on the official documentation to [join the testnet](http
 
 ## Genesis File
 
-Download the zipped genesis file [genesis.zip](./genesis.zip)
+Download the zipped genesis file [genesis.zip](https://archive.evmos.dev/evmos_9000-3/genesis.json)
 
 Extract it with command
 
