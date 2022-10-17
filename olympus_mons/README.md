@@ -14,7 +14,7 @@ Follow the instructions on the official documentation to [join the testnet](http
 
 ## Genesis File
 
-Download the minified genesis file [genesis.json](./genesis.json)
+Download the minified genesis file [genesis.json](https://archive.evmos.dev/olympus_mons/genesis.json)
 
 Verify the SHA256 checksum using:
 
