@@ -8,13 +8,7 @@ Follow the instructions on the official documentation to [join the testnet](http
 
 ## Genesis File
 
-Download the zipped genesis file [genesis.zip](./genesis.zip)
-
-Extract it with command
-
-```bash
-unzip genesis.zip
-```
+Download the zipped genesis file [genesis.zip](https://archive.evmos.dev/evmos_9000-4/genesis.json)
 
 Verify the SHA256 checksum using:
 
