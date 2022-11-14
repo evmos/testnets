@@ -8,7 +8,7 @@ Follow the instructions on the official documentation to [join the testnet](http
 
 ## Genesis File
 
-Download the zipped genesis file [genesis.zip](https://archive.evmos.dev/evmos_9000-4/genesis.json)
+Download the genesis file [genesis.json](https://archive.evmos.dev/evmos_9000-4/genesis.json)
 
 Verify the SHA256 checksum using:
 
@@ -21,7 +21,7 @@ sha256sum genesis.json
 
 - Network Chain ID: `evmos_9000-4`
 - EIP155 Chain ID: `9000`
-- `evmosd` version: [`v3.0.0-beta1`](https://github.com/tharsis/evmos/releases)
+- `evmosd` version: [`v10.0.0-rc1`](https://github.com/evmos/evmos/releases)
 - Faucet: [faucet.evmos.dev](https://faucet.evmos.dev)
 - EVM explorer: [evm.evmos.dev](https://evm.evmos.dev)
 - Cosmos explorer: [explorer.evmos.dev](https://explorer.evmos.dev)
